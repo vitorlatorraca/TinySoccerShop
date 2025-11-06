@@ -1,0 +1,523 @@
+================================================================================
+PRODUCT REQUIREMENTS DOCUMENT (PRD)
+E-COMMERCE DE CAMISAS DE FUTEBOL
+================================================================================
+
+Versão: 1.0
+Data: Novembro 2024
+
+================================================================================
+1. VISÃO GERAL DO PRODUTO
+================================================================================
+
+1.1 OBJETIVO
+Criar uma plataforma de e-commerce moderna e intuitiva para venda de camisas 
+de futebol autografadas e colecionáveis, oferecendo uma experiência de 
+navegação superior com design contemporâneo e sistema de filtragem avançado.
+
+1.2 PÚBLICO-ALVO
+- Colecionadores de memorabilia esportiva
+- Fãs de futebol (18-55 anos)
+- Investidores em itens esportivos de valor
+- Presentes para entusiastas do esporte
+
+================================================================================
+2. DESIGN E EXPERIÊNCIA DO USUÁRIO
+================================================================================
+
+2.1 PRINCÍPIOS DE DESIGN
+- Moderno e Minimalista: Design limpo com foco no produto
+- Visual Premium: Refletir o valor dos itens colecionáveis
+- Responsivo: Experiência perfeita em desktop, tablet e mobile
+- Performance: Carregamento rápido de imagens e interações fluidas
+
+2.2 PALETA DE CORES SUGERIDA
+- Primária: Azul escuro profundo (#0A1628) ou preto (#000000)
+- Secundária: Dourado/Bronze (#D4AF37) - transmite exclusividade
+- Accent: Verde vibrante (#00FF87) ou vermelho (#FF3B30)
+- Neutros: Cinzas modernos (#F5F5F7, #E5E5EA, #8E8E93)
+- Background: Branco puro (#FFFFFF) ou cinza claríssimo (#FAFAFA)
+
+2.3 TIPOGRAFIA
+- Headings: Fonte sans-serif moderna (ex: Inter, Manrope, Outfit)
+- Body: Fonte legível (ex: System UI, Inter, Roboto)
+- Preços: Fonte com peso bold para destaque
+
+================================================================================
+3. ESTRUTURA DO SITE
+================================================================================
+
+3.1 HEADER (NAVEGAÇÃO SUPERIOR)
+
+Elementos:
+- Logo (esquerda) - clicável para home
+- Menu principal centralizado ou esquerda:
+  * Camisas por Liga (dropdown)
+  * Camisas por Clube (dropdown)
+  * Seleções Nacionais
+  * Novidades
+  * Promoções
+- Ícones de ação (direita):
+  * Busca (com autocomplete)
+  * Conta/Login
+  * Favoritos (com contador)
+  * Carrinho (com contador e preview hover)
+
+Design:
+- Sticky header com background blur ao scroll
+- Animações suaves nos dropdowns
+- Breadcrumbs abaixo do header nas páginas internas
+
+3.2 PÁGINA PRINCIPAL (LISTAGEM DE PRODUTOS)
+
+Layout de Produtos - Grid Responsivo:
+- Desktop: 3-4 colunas
+- Tablet: 2-3 colunas
+- Mobile: 1-2 colunas
+- Espaçamento generoso entre cards
+
+Card de Produto:
+┌─────────────────────┐
+│                     │
+│   Imagem Produto    │
+│   (hover: zoom)     │
+│                     │
+├─────────────────────┤
+│ Badge: AUTOGRAFADO  │
+│ Clube / Jogador     │
+│ Descrição curta     │
+│ CAD $XXX.XX         │
+│ [Ver Detalhes]      │
+│ ♡ Favoritar         │
+└─────────────────────┘
+
+Recursos do Card:
+- Imagem principal (hover mostra imagem alternativa)
+- Badge visual para "Autografado", "Edição Limitada", "Novo"
+- Ícone de favoritos (funcional)
+- Quick view modal (ao clicar)
+- Indicador de disponibilidade
+- Rating/Reviews (se aplicável)
+
+================================================================================
+4. SISTEMA DE FILTRAGEM AVANÇADO
+================================================================================
+
+4.1 POSICIONAMENTO
+
+Sidebar Esquerda (Desktop):
+- Sempre visível
+- Scroll independente
+- Width: 280-320px
+
+Drawer/Modal (Mobile):
+- Botão flutuante "Filtros" com contador de ativos
+- Full-screen overlay
+- Aplicar/Limpar na parte inferior
+
+4.2 CATEGORIAS DE FILTROS
+
+────────────────────────────────────────────────────────────────────────────
+4.2.1 FILTRO POR LIGA/COMPETIÇÃO
+────────────────────────────────────────────────────────────────────────────
+☐ Premier League
+☐ La Liga
+☐ Serie A
+☐ Bundesliga
+☐ Ligue 1
+☐ MLS
+☐ Champions League
+☐ Copa do Mundo
+☐ Outras Ligas
+
+────────────────────────────────────────────────────────────────────────────
+4.2.2 FILTRO POR CLUBE
+────────────────────────────────────────────────────────────────────────────
+- Busca com autocomplete
+- Lista alfabética colapsável
+- Mostrar número de itens disponíveis
+
+────────────────────────────────────────────────────────────────────────────
+4.2.3 FILTRO POR SELEÇÃO NACIONAL
+────────────────────────────────────────────────────────────────────────────
+Organizado por confederação:
+- CONMEBOL
+- UEFA
+- CONCACAF
+- AFC
+- CAF
+- OFC
+
+────────────────────────────────────────────────────────────────────────────
+4.2.4 FILTRO POR JOGADOR
+────────────────────────────────────────────────────────────────────────────
+- Busca com autocomplete
+- Jogadores em destaque
+- Jogadores históricos
+- Filtro A-Z
+
+────────────────────────────────────────────────────────────────────────────
+4.2.5 FILTRO POR TAMANHO
+────────────────────────────────────────────────────────────────────────────
+☐ PP (XS)
+☐ P (S)
+☐ M (M)
+☐ G (L)
+☐ GG (XL)
+☐ XGG (XXL)
+☐ Infantil (por idade)
+
+Mostrar disponibilidade visual (cores diferentes para disponível/esgotado)
+
+────────────────────────────────────────────────────────────────────────────
+4.2.6 FILTRO POR TEMPORADA
+────────────────────────────────────────────────────────────────────────────
+- Slider de anos: 1990 - 2024
+- Seleção rápida:
+  ☐ Retrô (antes de 2000)
+  ☐ 2000-2010
+  ☐ 2010-2020
+  ☐ 2020-2024
+  ☐ Atual (2024-25)
+
+────────────────────────────────────────────────────────────────────────────
+4.2.7 FILTRO POR TIPO
+────────────────────────────────────────────────────────────────────────────
+☐ Home (Principal)
+☐ Away (Visitante)
+☐ Third (Terceiro uniforme)
+☐ Goleiro
+☐ Edição Especial
+☐ Treino
+
+────────────────────────────────────────────────────────────────────────────
+4.2.8 FILTRO POR CONDIÇÃO
+────────────────────────────────────────────────────────────────────────────
+☐ Nova com etiquetas
+☐ Nova sem etiquetas
+☐ Excelente estado
+☐ Bom estado
+☐ Vintage
+
+────────────────────────────────────────────────────────────────────────────
+4.2.9 FILTRO POR CARACTERÍSTICAS
+────────────────────────────────────────────────────────────────────────────
+☐ Autografada
+☐ Match Worn (usada em jogo)
+☐ Edição Limitada
+☐ Com certificado de autenticidade
+☐ Numerada
+☐ Com patches especiais
+
+────────────────────────────────────────────────────────────────────────────
+4.2.10 FILTRO POR FAIXA DE PREÇO
+────────────────────────────────────────────────────────────────────────────
+- Slider duplo: CAD $0 - $10,000+
+- Inputs manuais para valores específicos
+- Sugestões rápidas:
+  ☐ Até $200
+  ☐ $200 - $500
+  ☐ $500 - $1,000
+  ☐ $1,000 - $2,500
+  ☐ Acima de $2,500
+
+────────────────────────────────────────────────────────────────────────────
+4.2.11 FILTRO POR MARCA
+────────────────────────────────────────────────────────────────────────────
+☐ Nike
+☐ Adidas
+☐ Puma
+☐ Umbro
+☐ New Balance
+☐ Outras
+
+────────────────────────────────────────────────────────────────────────────
+4.2.12 FILTRO POR GÊNERO
+────────────────────────────────────────────────────────────────────────────
+☐ Masculino
+☐ Feminino
+☐ Infantil
+☐ Unissex
+
+================================================================================
+5. ORDENAÇÃO E VISUALIZAÇÃO
+================================================================================
+
+5.1 OPÇÕES DE ORDENAÇÃO
+- Mais relevantes (padrão)
+- Menor preço
+- Maior preço
+- Mais recentes
+- Mais populares
+- Nome A-Z
+- Nome Z-A
+
+5.2 CONTROLES DE VISUALIZAÇÃO
+Botões para alternar entre:
+- Grid 3 colunas
+- Grid 4 colunas
+- Lista detalhada
+- Número de itens por página: 24 / 48 / 96
+
+5.3 BARRA DE RESULTADOS
+[Filtros Ativos: Liga: Premier League ✕  Tamanho: M ✕]
+Mostrando 48 de 596 resultados
+[Ordenar por: Mais relevantes ▼] [Grid ⚏] [Itens/página: 48 ▼]
+
+================================================================================
+6. RECURSOS AVANÇADOS DE UX
+================================================================================
+
+6.1 FILTROS INTELIGENTES
+- Auto-atualização: Resultados atualizam sem reload
+- Contador de resultados: Mostrar quantos itens em cada opção de filtro
+- Desabilitar opções: Filtros que resultariam em 0 produtos ficam disabled
+- Persistência: Manter filtros ao navegar entre páginas
+- URL amigável: Filtros refletidos na URL para compartilhamento
+
+6.2 BUSCA AVANÇADA
+- Autocomplete com sugestões
+- Busca por:
+  * Nome do jogador
+  * Nome do clube
+  * Liga
+  * Temporada
+  * Número da camisa
+- Histórico de buscas
+- Buscas populares
+
+6.3 WISHLIST/FAVORITOS
+- Salvar produtos favoritos
+- Sincronização entre dispositivos (login)
+- Notificações de redução de preço
+- Compartilhar wishlist
+
+6.4 COMPARAÇÃO DE PRODUTOS
+- Selecionar até 4 produtos para comparar
+- Tabela comparativa side-by-side
+- Destacar diferenças
+
+6.5 RECOMENDAÇÕES PERSONALIZADAS
+- "Você também pode gostar"
+- "Produtos similares"
+- "Completam o look" (shorts, meias)
+- Baseado em histórico de navegação
+
+================================================================================
+7. PÁGINA DE DETALHES DO PRODUTO
+================================================================================
+
+7.1 LAYOUT
+
+Duas colunas:
+
+ESQUERDA (60%): Galeria de imagens
+- Imagem principal grande
+- Thumbnails abaixo ou ao lado
+- Zoom ao hover
+- Lightbox ao clicar
+- 360° view (se disponível)
+
+DIREITA (40%): Informações
+- Breadcrumb
+- Nome do produto (H1)
+- Badge de autenticidade
+- Preço destacado
+- Opções:
+  * Seletor de tamanho (visual)
+  * Quantidade
+- Botões de ação:
+  * Adicionar ao carrinho (primário)
+  * Adicionar aos favoritos
+  * Compartilhar
+- Informações de entrega
+- Formas de pagamento aceitas
+
+7.2 SEÇÃO DE DETALHES (ABAIXO)
+
+Tabs:
+1. Descrição: História da camisa, contexto
+2. Especificações: Tamanho, material, temporada, etc.
+3. Autenticidade: Certificado, procedência
+4. Entrega e Devolução: Políticas
+5. Avaliações: Reviews de clientes
+
+================================================================================
+8. FUNCIONALIDADES DE CARRINHO E CHECKOUT
+================================================================================
+
+8.1 MINI CARRINHO (Hover/Click no ícone)
+- Preview dos itens
+- Subtotal
+- Link para carrinho completo
+- Link para checkout rápido
+
+8.2 PÁGINA DO CARRINHO
+- Lista de produtos editável
+- Atualizar quantidade
+- Remover itens
+- Salvar para depois
+- Código de cupom/desconto
+- Resumo de valores
+- CTA para checkout
+
+8.3 CHECKOUT
+Processo em etapas:
+1. Endereço de entrega
+2. Método de envio
+3. Pagamento
+4. Revisão e confirmação
+
+- Checkout como convidado ou login
+- Salvamento de informações
+- Múltiplas formas de pagamento
+
+================================================================================
+9. FUNCIONALIDADES TÉCNICAS
+================================================================================
+
+9.1 PERFORMANCE
+- Lazy loading de imagens
+- CDN para assets
+- Caching inteligente
+- Minificação de CSS/JS
+- Server-side rendering para SEO
+
+9.2 SEO
+- URLs amigáveis
+- Meta tags dinâmicas
+- Schema markup para produtos
+- Sitemap XML
+- Breadcrumbs estruturados
+
+9.3 SEGURANÇA
+- HTTPS obrigatório
+- PCI compliance para pagamentos
+- Proteção contra fraude
+- Rate limiting na API
+- Sanitização de inputs
+
+9.4 INTEGRAÇÕES
+- Gateway de pagamento (Stripe, PayPal)
+- Sistema de envio (Correios, transportadoras)
+- Email marketing
+- Analytics (Google Analytics, Hotjar)
+- Chat ao vivo
+- Redes sociais
+
+================================================================================
+10. MOBILE-FIRST CONSIDERATIONS
+================================================================================
+
+10.1 ADAPTAÇÕES PARA MOBILE
+- Menu hambúrguer
+- Busca em tela cheia
+- Filtros em drawer
+- Botões de ação flutuantes
+- Imagens otimizadas
+- Touch-friendly (botões maiores)
+- Swipe gestures na galeria
+
+10.2 APP-LIKE FEATURES
+- Add to home screen (PWA)
+- Notificações push
+- Modo offline básico
+- Scroll infinito (opcional)
+
+================================================================================
+11. MÉTRICAS DE SUCESSO
+================================================================================
+
+11.1 KPIs PRINCIPAIS
+- Taxa de conversão
+- Valor médio do pedido (AOV)
+- Taxa de abandono de carrinho
+- Tempo médio no site
+- Taxa de retorno
+- Net Promoter Score (NPS)
+
+11.2 MÉTRICAS DE UX
+- Uso dos filtros
+- Cliques em produtos
+- Taxa de uso da busca
+- Profundidade de navegação
+- Taxa de adição ao carrinho
+- Taxa de conclusão de checkout
+
+================================================================================
+12. ROADMAP DE FUNCIONALIDADES FUTURAS
+================================================================================
+
+FASE 2:
+- Programa de fidelidade
+- Sistema de pontos
+- Câmbio de moedas
+- Venda consignada
+- Avaliação de camisas
+
+FASE 3:
+- Realidade aumentada (experimentar camisa)
+- Customização de produtos
+- Marketplace (vendedores terceiros)
+- Leilões ao vivo
+- App mobile nativo
+
+================================================================================
+13. ESPECIFICAÇÕES DE CONTEÚDO
+================================================================================
+
+13.1 FOTOGRAFIA DE PRODUTOS
+Mínimo 5 fotos por produto:
+1. Frente sobre fundo branco
+2. Costas sobre fundo branco
+3. Detalhe do autógrafo (se aplicável)
+4. Etiqueta/tag
+5. Certificado de autenticidade
+
+- Resolução mínima: 2000x2000px
+- Formato: WebP com fallback JPG
+
+13.2 DESCRIÇÕES
+- Título otimizado para SEO (60 chars)
+- Descrição curta (160 chars)
+- Descrição longa (300-500 palavras)
+- Especificações técnicas completas
+- História/contexto do item
+
+================================================================================
+14. ACESSIBILIDADE
+================================================================================
+
+REQUISITOS WCAG 2.1 AA:
+- Contraste de cores adequado (4.5:1)
+- Textos alternativos em imagens
+- Navegação por teclado
+- Labels em formulários
+- Aria-labels apropriados
+- Foco visível
+- Tamanhos de clique adequados (44x44px min)
+
+================================================================================
+15. REFERÊNCIAS DE DESIGN MODERNO
+================================================================================
+
+15.1 INSPIRAÇÕES DE LAYOUT
+- Nike.com: Cards de produto, hover effects
+- Farfetch: Navegação sofisticada, filtros
+- SSENSE: Design minimalista premium
+- StockX: Transparência de preços, autenticidade
+- Grailed: Marketplace de luxo
+
+15.2 TENDÊNCIAS DE DESIGN 2024
+- Glassmorphism sutil
+- Micro-interações
+- Animações suaves (Framer Motion)
+- Dark mode opcional
+- Gradientes sutis
+- Sombras suaves (soft shadows)
+- Espaçamento generoso
+- Tipografia grande e bold
+
+================================================================================
+FIM DO DOCUMENTO
+================================================================================
