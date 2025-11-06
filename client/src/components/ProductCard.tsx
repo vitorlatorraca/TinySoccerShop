@@ -34,8 +34,7 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
       onMouseLeave={() => setIsHovered(false)}
       data-testid={`card-product-${product.id}`}
     >
-      <Link href={`/product/${product.slug}`}>
-        <a className="block">
+      <Link href={`/product/${product.slug}`} className="block">
           <div className="relative aspect-square overflow-hidden bg-muted">
             <img
               src={displayImage}
@@ -121,7 +120,6 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
               </Button>
             </div>
           </div>
-        </a>
       </Link>
     </Card>
   );

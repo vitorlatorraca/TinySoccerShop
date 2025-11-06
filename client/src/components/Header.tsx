@@ -27,13 +27,11 @@ export function Header({ cartItemCount, favoritesCount, onCartClick }: HeaderPro
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-6 lg:gap-8">
-            <Link href="/">
-              <a className="flex items-center gap-2" data-testid="link-home">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary">
-                  <span className="text-lg font-bold text-primary-foreground">TSS</span>
-                </div>
-                <span className="hidden text-xl font-bold sm:inline-block">TinySoccerShop</span>
-              </a>
+            <Link href="/" className="flex items-center gap-2" data-testid="link-home">
+              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary">
+                <span className="text-lg font-bold text-primary-foreground">TSS</span>
+              </div>
+              <span className="hidden text-xl font-bold sm:inline-block">TinySoccerShop</span>
             </Link>
 
             <nav className="hidden lg:flex lg:gap-6">
@@ -67,23 +65,23 @@ export function Header({ cartItemCount, favoritesCount, onCartClick }: HeaderPro
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Link href="/?category=national-teams">
-                <Button variant="ghost" size="sm" data-testid="button-national-teams">
+              <Button variant="ghost" size="sm" asChild data-testid="button-national-teams">
+                <Link href="/?category=national-teams">
                   Seleções
-                </Button>
-              </Link>
+                </Link>
+              </Button>
 
-              <Link href="/?sort=newest">
-                <Button variant="ghost" size="sm" data-testid="button-new-arrivals">
+              <Button variant="ghost" size="sm" asChild data-testid="button-new-arrivals">
+                <Link href="/?sort=newest">
                   Novidades
-                </Button>
-              </Link>
+                </Link>
+              </Button>
 
-              <Link href="/?featured=true">
-                <Button variant="ghost" size="sm" className="text-accent" data-testid="button-promotions">
+              <Button variant="ghost" size="sm" asChild className="text-accent" data-testid="button-promotions">
+                <Link href="/?featured=true">
                   Promoções
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </nav>
           </div>
 
