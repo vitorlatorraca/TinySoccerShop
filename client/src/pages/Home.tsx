@@ -8,6 +8,9 @@ import { SortControls } from "@/components/SortControls";
 import { ActiveFilters } from "@/components/ActiveFilters";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { CartPreview } from "@/components/CartPreview";
+import { HeroBanner } from "@/components/HeroBanner";
+import { LegendsSection } from "@/components/LegendsSection";
+import { PopularTeamsSection } from "@/components/PopularTeamsSection";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Filter } from "lucide-react";
@@ -49,6 +52,14 @@ export default function Home() {
   const { data: products = [], isLoading: productsLoading } = useQuery<Product[]>({
     queryKey: [`/api/products?${queryString}`],
   });
+
+  // Get all products for hero banner and sections (no filters)
+  const { data: allProducts = [] } = useQuery<Product[]>({
+    queryKey: ['/api/products'],
+  });
+
+  // Get featured product for hero banner
+  const featuredProduct = allProducts.find(p => p.featured) || allProducts[0] || null;
 
   const { data: cartItems = [] } = useQuery<CartItemWithProduct[]>({
     queryKey: ['/api/cart'],
@@ -128,12 +139,12 @@ export default function Home() {
 
   const handleFavoriteToggle = (productId: string) => {
     const existingFavorite = favorites.find((f) => f.productId === productId);
-    const action = existingFavorite ? "removido dos" : "adicionado aos";
+    const action = existingFavorite ? "removed from" : "added to";
     
     toggleFavoriteMutation.mutate(productId, {
       onSuccess: () => {
         toast({
-          title: `Produto ${action} favoritos`,
+          title: `Product ${action} favorites`,
           duration: 2000,
         });
       },
@@ -147,8 +158,8 @@ export default function Home() {
     addToCartMutation.mutate({ productId, size }, {
       onSuccess: () => {
         toast({
-          title: "Produto adicionado ao carrinho",
-          description: `${product.name} - Tamanho ${size}`,
+          title: "Product added to cart",
+          description: `${product.name} - Size ${size}`,
           duration: 2000,
         });
       },
@@ -159,7 +170,7 @@ export default function Home() {
     removeCartMutation.mutate(itemId, {
       onSuccess: () => {
         toast({
-          title: "Produto removido do carrinho",
+          title: "Product removed from cart",
           duration: 2000,
         });
       },
@@ -181,6 +192,16 @@ export default function Home() {
         onCartClick={() => setCartOpen(true)}
       />
 
+      {/* Hero Banner */}
+      <HeroBanner product={featuredProduct} />
+
+      {/* Legends Section */}
+      <LegendsSection products={allProducts} />
+
+      {/* Popular Teams Section */}
+      <PopularTeamsSection products={allProducts} />
+
+      {/* Products Section with Filters */}
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex gap-8">
           <aside className="hidden w-80 shrink-0 lg:block">
@@ -195,12 +216,12 @@ export default function Home() {
 
           <main className="flex-1">
             <div className="mb-6 flex items-center justify-between">
-              <h1 className="text-3xl font-bold">Camisas de Futebol</h1>
+              <h1 className="text-3xl font-bold">Football Shirts</h1>
               <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
                 <SheetTrigger asChild className="lg:hidden">
                   <Button variant="outline" data-testid="button-mobile-filters">
                     <Filter className="mr-2 h-4 w-4" />
-                    Filtros
+                    Filters
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-80 overflow-y-auto">

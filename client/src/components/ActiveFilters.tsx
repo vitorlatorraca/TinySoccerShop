@@ -25,7 +25,7 @@ export function ActiveFilters({ filters, onRemoveFilter }: ActiveFiltersProps) {
 
   if (filters.sizes && filters.sizes.length > 0) {
     filters.sizes.forEach((size) => {
-      activeFilters.push({ category: "sizes", label: `Tamanho: ${size}`, value: size });
+      activeFilters.push({ category: "sizes", label: `Size: ${size}`, value: size });
     });
   }
 
@@ -58,12 +58,12 @@ export function ActiveFilters({ filters, onRemoveFilter }: ActiveFiltersProps) {
     const max = filters.maxPrice || 10000;
     activeFilters.push({
       category: "minPrice",
-      label: `CAD $${min} - $${max}`,
+      label: `$${min} - $${max}`,
     });
   }
 
   if (filters.isAutographed) {
-    activeFilters.push({ category: "isAutographed", label: "Autografada" });
+    activeFilters.push({ category: "isAutographed", label: "Autographed" });
   }
 
   if (filters.isMatchWorn) {
@@ -71,11 +71,11 @@ export function ActiveFilters({ filters, onRemoveFilter }: ActiveFiltersProps) {
   }
 
   if (filters.isLimitedEdition) {
-    activeFilters.push({ category: "isLimitedEdition", label: "Edição Limitada" });
+    activeFilters.push({ category: "isLimitedEdition", label: "Limited Edition" });
   }
 
   if (filters.hasCertificate) {
-    activeFilters.push({ category: "hasCertificate", label: "Com Certificado" });
+    activeFilters.push({ category: "hasCertificate", label: "With Certificate" });
   }
 
   if (activeFilters.length === 0) {
@@ -84,7 +84,7 @@ export function ActiveFilters({ filters, onRemoveFilter }: ActiveFiltersProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2 rounded-lg border bg-muted/50 p-4" data-testid="active-filters">
-      <span className="text-sm font-semibold">Filtros ativos:</span>
+      <span className="text-sm font-semibold">Active filters:</span>
       {activeFilters.map((filter, index) => (
         <Badge
           key={`${filter.category}-${filter.value || 'bool'}-${index}`}

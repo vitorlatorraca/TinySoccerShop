@@ -138,7 +138,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
   return (
     <div className="w-full space-y-6 overflow-y-auto pr-2" data-testid="filter-sidebar">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Filtros</h2>
+        <h2 className="text-lg font-semibold">Filters</h2>
         {activeFilterCount > 0 && (
           <Button
             variant="ghost"

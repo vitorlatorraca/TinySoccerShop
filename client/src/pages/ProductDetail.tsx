@@ -89,8 +89,8 @@ export default function ProductDetail() {
     addToCartMutation.mutate({ productId: product.id, size: selectedSize }, {
       onSuccess: () => {
         toast({
-          title: "Produto adicionado ao carrinho",
-          description: `${product.name} - Tamanho ${selectedSize}`,
+          title: "Product added to cart",
+          description: `${product.name} - Size ${selectedSize}`,
           duration: 2000,
         });
       },
@@ -101,12 +101,12 @@ export default function ProductDetail() {
     if (!product) return;
     
     const existingFavorite = favorites.find((f) => f.productId === product.id);
-    const action = existingFavorite ? "removido dos" : "adicionado aos";
+    const action = existingFavorite ? "removed from" : "added to";
     
     toggleFavoriteMutation.mutate(product.id, {
       onSuccess: () => {
         toast({
-          title: `Produto ${action} favoritos`,
+          title: `Product ${action} favorites`,
           duration: 2000,
         });
       },
@@ -117,7 +117,7 @@ export default function ProductDetail() {
     removeCartMutation.mutate(itemId, {
       onSuccess: () => {
         toast({
-          title: "Produto removido do carrinho",
+          title: "Product removed from cart",
           duration: 2000,
         });
       },
@@ -174,10 +174,10 @@ export default function ProductDetail() {
         />
         <div className="container mx-auto flex h-96 items-center justify-center px-4">
           <div className="text-center">
-            <h1 className="mb-4 text-2xl font-bold">Produto não encontrado</h1>
+            <h1 className="mb-4 text-2xl font-bold">Product not found</h1>
             <Button asChild>
               <Link href="/">
-                <a>Voltar para loja</a>
+                <a>Back to shop</a>
               </Link>
             </Button>
           </div>
@@ -271,25 +271,25 @@ export default function ProductDetail() {
               )}
               {product.isLimitedEdition && (
                 <Badge variant="secondary" data-testid="badge-limited">
-                  EDIÇÃO LIMITADA
+                  LIMITED EDITION
                 </Badge>
               )}
               {product.hasCertificate && (
                 <Badge variant="outline" data-testid="badge-certificate">
                   <CheckCircle className="mr-1 h-3 w-3" />
-                  CERTIFICADO
+                  CERTIFIED
                 </Badge>
               )}
             </div>
 
             <div className="mb-8">
               <p className="text-4xl font-bold tabular-nums" data-testid="text-price">
-                CAD ${parseFloat(product.price).toFixed(2)}
+                ${parseFloat(product.price).toFixed(2)}
               </p>
             </div>
 
             <Card className="mb-6 p-6">
-              <h3 className="mb-4 text-lg font-semibold">Selecione o Tamanho</h3>
+              <h3 className="mb-4 text-lg font-semibold">Select Size</h3>
               <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
                 {product.sizes.map((size) => (
                   <Button
@@ -314,7 +314,7 @@ export default function ProductDetail() {
                 data-testid="button-add-to-cart"
               >
                 <ShoppingCart className="mr-2 h-5 w-5" />
-                {product.inStock ? "Adicionar ao Carrinho" : "Esgotado"}
+                {product.inStock ? "Add to Cart" : "Out of Stock"}
               </Button>
               <Button
                 variant="outline"
@@ -323,7 +323,7 @@ export default function ProductDetail() {
                 data-testid="button-favorite"
               >
                 <Heart className={`mr-2 h-5 w-5 ${isFavorite ? 'fill-current' : ''}`} />
-                {isFavorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
+                {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
               </Button>
             </div>
 
@@ -331,18 +331,18 @@ export default function ProductDetail() {
               <div className="flex items-start gap-2">
                 <Shield className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
                 <div>
-                  <p className="font-semibold">Autenticidade Garantida</p>
+                  <p className="font-semibold">Authenticity Guaranteed</p>
                   <p className="text-muted-foreground">
-                    Todos os produtos são verificados e vêm com certificado
+                    All products are verified and come with certificate
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
                 <Award className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
                 <div>
-                  <p className="font-semibold">Peça de Colecionador</p>
+                  <p className="font-semibold">Collector's Piece</p>
                   <p className="text-muted-foreground">
-                    Item premium para sua coleção de memorabilia
+                    Premium item for your memorabilia collection
                   </p>
                 </div>
               </div>
@@ -354,13 +354,13 @@ export default function ProductDetail() {
           <Tabs defaultValue="description" className="w-full">
             <TabsList className="grid w-full max-w-2xl grid-cols-3">
               <TabsTrigger value="description" data-testid="tab-description">
-                Descrição
+                Description
               </TabsTrigger>
               <TabsTrigger value="details" data-testid="tab-details">
-                Detalhes
+                Details
               </TabsTrigger>
               <TabsTrigger value="authentication" data-testid="tab-authentication">
-                Autenticidade
+                Authentication
               </TabsTrigger>
             </TabsList>
             <TabsContent value="description" className="mt-6">
@@ -374,31 +374,31 @@ export default function ProductDetail() {
               <Card className="p-6">
                 <dl className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <dt className="font-semibold">Clube:</dt>
+                    <dt className="font-semibold">Club:</dt>
                     <dd className="text-muted-foreground">{product.club}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold">Liga:</dt>
+                    <dt className="font-semibold">League:</dt>
                     <dd className="text-muted-foreground">{product.league}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold">Temporada:</dt>
+                    <dt className="font-semibold">Season:</dt>
                     <dd className="text-muted-foreground">{product.season}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold">Tipo:</dt>
+                    <dt className="font-semibold">Type:</dt>
                     <dd className="text-muted-foreground">{product.type}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold">Condição:</dt>
+                    <dt className="font-semibold">Condition:</dt>
                     <dd className="text-muted-foreground">{product.condition}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold">Marca:</dt>
+                    <dt className="font-semibold">Brand:</dt>
                     <dd className="text-muted-foreground">{product.brand}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold">Gênero:</dt>
+                    <dt className="font-semibold">Gender:</dt>
                     <dd className="text-muted-foreground">{product.gender}</dd>
                   </div>
                 </dl>
@@ -410,20 +410,20 @@ export default function ProductDetail() {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="mt-1 h-6 w-6 shrink-0 text-accent" />
                     <div>
-                      <h4 className="mb-1 font-semibold">Certificado de Autenticidade</h4>
+                      <h4 className="mb-1 font-semibold">Authenticity Certificate</h4>
                       <p className="text-muted-foreground">
-                        Este produto inclui certificado oficial de autenticidade que garante a
-                        procedência e legitimidade do item.
+                        This product includes an official authenticity certificate that guarantees
+                        the origin and legitimacy of the item.
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Shield className="mt-1 h-6 w-6 shrink-0 text-accent" />
                     <div>
-                      <h4 className="mb-1 font-semibold">Verificação de Procedência</h4>
+                      <h4 className="mb-1 font-semibold">Origin Verification</h4>
                       <p className="text-muted-foreground">
-                        Todos os nossos produtos passam por rigorosa verificação de autenticidade
-                        antes de serem listados para venda.
+                        All our products undergo rigorous authenticity verification
+                        before being listed for sale.
                       </p>
                     </div>
                   </div>

@@ -18,9 +18,9 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
 
   const getBadges = () => {
     const badges = [];
-    if (product.isAutographed) badges.push({ text: "AUTOGRAFADO", variant: "default" as const });
-    if (product.isLimitedEdition) badges.push({ text: "EDIÇÃO LIMITADA", variant: "secondary" as const });
-    if (product.featured) badges.push({ text: "DESTAQUE", variant: "destructive" as const });
+    if (product.isAutographed) badges.push({ text: "AUTOGRAPHED", variant: "default" as const });
+    if (product.isLimitedEdition) badges.push({ text: "LIMITED EDITION", variant: "secondary" as const });
+    if (product.featured) badges.push({ text: "FEATURED", variant: "destructive" as const });
     return badges;
   };
 
@@ -59,7 +59,7 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
             {!product.inStock && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/60">
                 <Badge variant="secondary" className="text-sm">
-                  ESGOTADO
+                  OUT OF STOCK
                 </Badge>
               </div>
             )}
@@ -89,7 +89,7 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
 
             <div className="mb-3 flex items-baseline gap-1">
               <span className="text-2xl font-bold tabular-nums" data-testid={`text-price-${product.id}`}>
-                CAD ${parseFloat(product.price).toFixed(2)}
+                ${parseFloat(product.price).toFixed(2)}
               </span>
             </div>
 
@@ -104,7 +104,7 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
                 data-testid={`button-quick-view-${product.id}`}
               >
                 <Eye className="mr-2 h-4 w-4" />
-                Ver Detalhes
+                Quick View
               </Button>
               <Button
                 size="icon"

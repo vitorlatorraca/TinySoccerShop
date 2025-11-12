@@ -39,10 +39,10 @@ export function CartPreview({ open, onClose, items, onRemoveItem, onUpdateQuanti
             <div className="flex h-64 flex-col items-center justify-center text-center">
               <ShoppingBag className="mb-4 h-16 w-16 text-muted-foreground" />
               <p className="mb-2 text-lg font-semibold" data-testid="text-cart-empty">
-                Seu carrinho está vazio
+                Your cart is empty
               </p>
               <p className="text-sm text-muted-foreground">
-                Adicione produtos para começar
+                Add products to get started
               </p>
             </div>
           ) : (

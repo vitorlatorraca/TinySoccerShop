@@ -56,10 +56,10 @@ export function ProductGrid({
           <span className="text-4xl font-bold text-muted-foreground">0</span>
         </div>
         <h3 className="mb-2 text-2xl font-bold" data-testid="text-no-products">
-          Nenhum produto encontrado
+          No products found
         </h3>
         <p className="text-muted-foreground">
-          Tente ajustar seus filtros ou buscar por algo diferente
+          Try adjusting your filters or search for something different
         </p>
       </div>
     );
