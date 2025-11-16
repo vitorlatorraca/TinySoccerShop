@@ -153,9 +153,9 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         )}
       </div>
 
-      <Accordion type="multiple" defaultValue={["price", "leagues", "sizes"]} className="w-full">
+      <Accordion type="multiple" defaultValue={["price", "leagues", "sizes"]} className="w-full border-t">
         <AccordionItem value="price">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-price">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-price">
             FAIXA DE PREÇO
           </AccordionTrigger>
           <AccordionContent>
@@ -196,7 +196,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="leagues">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-leagues">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-leagues">
             LIGA / COMPETIÇÃO
           </AccordionTrigger>
           <AccordionContent>
@@ -224,7 +224,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="clubs">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-clubs">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-clubs">
             CLUBES
           </AccordionTrigger>
           <AccordionContent>
@@ -252,7 +252,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="nationalTeams">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-national-teams">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-national-teams">
             SELEÇÕES NACIONAIS
           </AccordionTrigger>
           <AccordionContent>
@@ -280,7 +280,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="seasons">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-seasons">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-seasons">
             TEMPORADAS
           </AccordionTrigger>
           <AccordionContent>
@@ -308,7 +308,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="players">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-players">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-players">
             JOGADORES
           </AccordionTrigger>
           <AccordionContent>
@@ -336,7 +336,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="sizes">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-sizes">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-sizes">
             TAMANHO
           </AccordionTrigger>
           <AccordionContent>
@@ -363,7 +363,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="types">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-types">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-types">
             TIPO
           </AccordionTrigger>
           <AccordionContent>
@@ -388,7 +388,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="conditions">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-conditions">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-conditions">
             CONDIÇÃO
           </AccordionTrigger>
           <AccordionContent>
@@ -416,7 +416,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="features">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-features">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-features">
             CARACTERÍSTICAS
           </AccordionTrigger>
           <AccordionContent>
@@ -478,7 +478,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="brands">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-brands">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-brands">
             MARCA
           </AccordionTrigger>
           <AccordionContent>
@@ -503,7 +503,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         </AccordionItem>
 
         <AccordionItem value="genders">
-          <AccordionTrigger className="text-sm font-semibold" data-testid="accordion-genders">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-genders">
             GÊNERO
           </AccordionTrigger>
           <AccordionContent>
