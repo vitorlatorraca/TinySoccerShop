@@ -1,17 +1,11 @@
 import { Link } from "wouter";
-import { Search, User, Heart, ShoppingCart, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { TopBar } from "./TopBar";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { Shield } from "lucide-react";
 
 interface HeaderProps {
   cartItemCount: number;
@@ -19,57 +13,99 @@ interface HeaderProps {
   onCartClick: () => void;
 }
 
-export function Header({ cartItemCount, favoritesCount, onCartClick }: HeaderProps) {
+export function Header({ cartItemCount, onCartClick }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const menuCategories = [
+    { name: "Christmas Jumpers" },
+    { name: "New in" },
+    { name: "Classic", hasSubmenu: true },
+    { name: "Clearance" },
+    { name: "Current Season" },
+    { name: "Weekly Deals" },
+    { name: "Premier League", hasSubmenu: true },
+    { name: "Serie A", hasSubmenu: true },
+    { name: "La Liga", hasSubmenu: true },
+    { name: "Bundesliga", hasSubmenu: true },
+    { name: "Ligue 1", hasSubmenu: true },
+    { name: "MLS", hasSubmenu: true },
+  ];
+
+  const categories = [
+    { name: "Football Tops", path: "/shop/football-tops" },
+    { name: "Football Bottoms", path: "/shop/football-bottoms" },
+    { name: "Football Accessories", path: "/shop/football-accessories" },
+    { name: "Rugby", path: "/shop/rugby" },
+    { name: "Basketball", path: "/shop/basketball" },
+    { name: "Other Sports", path: "/shop/other-sports" },
+    { name: "Shop All", path: "/shop/all" },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 w-full">
-      <TopBar />
-      <div className="bg-[#1a5d2e] text-white">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
+      <div className="bg-[#1a5d2e]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between">
-            <div className="flex items-center gap-6 lg:gap-8">
-              <Link href="/" className="flex items-center gap-2" data-testid="link-home">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white/10">
-                  <span className="text-lg font-bold text-white">⚽</span>
-                </div>
-                <span className="hidden text-xl font-bold text-white sm:inline-block">TinySoccerShop</span>
-              </Link>
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo - Left */}
+            <Link href="/" className="flex items-center gap-3" data-testid="link-home">
+              <div className="flex h-10 w-10 items-center justify-center text-white">
+                <Shield className="h-8 w-8" />
+              </div>
+              <div className="hidden sm:flex flex-col">
+                <span className="text-white text-xl font-bold leading-tight">TINY</span>
+                <span className="text-white text-xl font-bold leading-tight">SOCCER</span>
+                <span className="text-white text-xl font-bold leading-tight">SHOP</span>
+              </div>
+            </Link>
 
-            </div>
-
-            <div className="flex flex-1 items-center justify-center px-4">
-              <div className="relative w-full max-w-2xl">
-                <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-white/70" />
+            {/* Search Bar - Center */}
+            <div className="flex-1 max-w-2xl mx-8 hidden md:block">
+              <div className="relative">
                 <Input
                   type="search"
                   placeholder="Search entire store here..."
-                  className="h-12 w-full bg-white/10 border-white/20 pl-10 pr-4 text-white placeholder:text-white/70 focus:bg-white/20"
+                  className="h-10 w-full pl-4 pr-10 border-0 border-b-2 border-white bg-transparent text-white placeholder:text-white/70 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-white rounded-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   data-testid="input-search"
                 />
+                <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-white" />
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10" data-testid="button-account">
-                <User className="h-5 w-5" />
-              </Button>
-
-              <Button variant="ghost" size="icon" className="relative text-white hover:bg-white/10" data-testid="button-favorites">
-                <Heart className="h-5 w-5" />
-                {favoritesCount > 0 && (
-                  <Badge
-                    variant="destructive"
-                    className="absolute -right-1 -top-1 h-5 min-w-5 rounded-full px-1 text-xs"
-                    data-testid="badge-favorites-count"
-                  >
-                    {favoritesCount}
-                  </Badge>
-                )}
-              </Button>
+            {/* Menu & Cart - Right */}
+            <div className="flex items-center gap-4">
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/10" data-testid="button-mobile-menu">
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-80 p-0">
+                  <div className="flex items-center justify-between p-4 border-b">
+                    <h2 className="text-lg font-semibold">Menu</h2>
+                    <SheetClose asChild>
+                      <Button variant="ghost" size="icon">
+                        <X className="h-5 w-5" />
+                      </Button>
+                    </SheetClose>
+                  </div>
+                  <nav className="flex flex-col">
+                    {menuCategories.map((cat, index) => (
+                      <div key={cat.name} className="border-b border-gray-200">
+                        <Link 
+                          href="/shop/all" 
+                          className="flex items-center justify-between px-4 py-4 text-sm font-medium hover:bg-gray-50 transition-colors"
+                        >
+                          <span>{cat.name}</span>
+                          {cat.hasSubmenu && <ChevronDown className="h-4 w-4 text-gray-400" />}
+                        </Link>
+                      </div>
+                    ))}
+                  </nav>
+                </SheetContent>
+              </Sheet>
 
               <Button
                 variant="ghost"
@@ -78,7 +114,7 @@ export function Header({ cartItemCount, favoritesCount, onCartClick }: HeaderPro
                 onClick={onCartClick}
                 data-testid="button-cart"
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-6 w-6" />
                 {cartItemCount > 0 && (
                   <Badge
                     variant="destructive"
@@ -89,91 +125,25 @@ export function Header({ cartItemCount, favoritesCount, onCartClick }: HeaderPro
                   </Badge>
                 )}
               </Button>
-
-              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                <SheetTrigger asChild className="lg:hidden">
-                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/10" data-testid="button-mobile-menu">
-                    {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-80">
-                  <nav className="flex flex-col gap-4 pt-8">
-                    <div className="pb-4">
-                      <Input
-                        type="search"
-                        placeholder="Buscar camisas..."
-                        className="w-full"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        data-testid="input-search-mobile"
-                      />
-                    </div>
-                    <Link href="/?league=premier-league">
-                      <a className="block rounded-md px-3 py-2 text-sm font-medium hover-elevate" data-testid="mobile-link-premier-league">
-                        Premier League
-                      </a>
-                    </Link>
-                    <Link href="/?league=la-liga">
-                      <a className="block rounded-md px-3 py-2 text-sm font-medium hover-elevate" data-testid="mobile-link-la-liga">
-                        La Liga
-                      </a>
-                    </Link>
-                    <Link href="/?league=serie-a">
-                      <a className="block rounded-md px-3 py-2 text-sm font-medium hover-elevate" data-testid="mobile-link-serie-a">
-                        Serie A
-                      </a>
-                    </Link>
-                    <Link href="/?category=national-teams">
-                      <a className="block rounded-md px-3 py-2 text-sm font-medium hover-elevate" data-testid="mobile-link-national-teams">
-                        Seleções Nacionais
-                      </a>
-                    </Link>
-                    <Link href="/?sort=newest">
-                      <a className="block rounded-md px-3 py-2 text-sm font-medium hover-elevate" data-testid="mobile-link-new-arrivals">
-                        Novidades
-                      </a>
-                    </Link>
-                    <Link href="/?featured=true">
-                      <a className="block rounded-md px-3 py-2 text-sm font-medium text-accent hover-elevate" data-testid="mobile-link-promotions">
-                        Promoções
-                      </a>
-                    </Link>
-                  </nav>
-                </SheetContent>
-              </Sheet>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Navigation Bar - White */}
-      <div className="bg-white border-b">
+      {/* Navigation Bar - Categories */}
+      <div className="bg-[#1a5d2e] border-b border-[#0d2818]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex h-14 items-center gap-6 overflow-x-auto">
-            <Link href="/?sort=newest" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              New in
-            </Link>
-            <Link href="/?featured=true" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              Classic Sale
-            </Link>
-            <Link href="/?featured=true" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              Weekly Deals
-            </Link>
-            <Link href="/?type=classic" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              Classic
-            </Link>
-            <Link href="/?type=current" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              Current Season
-            </Link>
-            <Link href="/?condition=clearance" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              Clearance
-            </Link>
-            <Link href="/?sort=price-asc" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              Price Drops
-            </Link>
-            <Link href="/?condition=warehouse" className="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-              Warehouse Clearance
-            </Link>
+          <nav className="flex h-12 items-center gap-6 overflow-x-auto scrollbar-hide">
+            {categories.map((cat) => (
+              <Link 
+                key={cat.path} 
+                href={cat.path} 
+                className="whitespace-nowrap text-sm font-semibold text-white hover:text-white/80 transition-colors relative group"
+              >
+                {cat.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full"></span>
+              </Link>
+            ))}
           </nav>
         </div>
       </div>

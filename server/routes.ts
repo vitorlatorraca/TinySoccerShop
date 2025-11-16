@@ -17,6 +17,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         conditions: req.query.conditions ? JSON.parse(req.query.conditions as string) : undefined,
         brands: req.query.brands ? JSON.parse(req.query.brands as string) : undefined,
         genders: req.query.genders ? JSON.parse(req.query.genders as string) : undefined,
+        categories: req.query.categories ? JSON.parse(req.query.categories as string) : undefined,
         minPrice: req.query.minPrice ? Number(req.query.minPrice) : undefined,
         maxPrice: req.query.maxPrice ? Number(req.query.maxPrice) : undefined,
         isAutographed: req.query.isAutographed === 'true',

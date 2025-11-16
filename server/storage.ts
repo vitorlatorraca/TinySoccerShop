@@ -58,6 +58,7 @@ export class MemStorage implements IStorage {
         description: "Historic Barcelona 2010/11 season shirt, autographed by Lionel Messi. Special edition with authenticity certificate. Iconic shirt from one of the club's greatest seasons.",
         season: "2010/11",
         type: "Home",
+        category: "football-tops",
         condition: "New with tags",
         brand: "Nike",
         gender: "Men",
@@ -85,6 +86,7 @@ export class MemStorage implements IStorage {
         description: "Autographed David Beckham shirt from Manchester United's historic treble-winning 1998/99 season. Collector's piece with authenticity certificate.",
         season: "1998/99",
         type: "Home",
+        category: "football-tops",
         condition: "Excellent condition",
         brand: "Umbro",
         gender: "Men",
@@ -112,6 +114,7 @@ export class MemStorage implements IStorage {
         description: "Autographed Cristiano Ronaldo shirt from the 2016/17 season when Real Madrid won the Champions League. Premium collector's item.",
         season: "2016/17",
         type: "Home",
+        category: "football-tops",
         condition: "New with tags",
         brand: "Adidas",
         gender: "Men",
@@ -139,6 +142,7 @@ export class MemStorage implements IStorage {
         description: "Autographed Brazil national team shirt from the 2002 World Cup champions. Ronaldo, top scorer with 8 goals. Extremely rare collector's piece.",
         season: "2002",
         type: "Home",
+        category: "football-tops",
         condition: "Vintage",
         brand: "Nike",
         gender: "Men",
@@ -166,6 +170,7 @@ export class MemStorage implements IStorage {
         description: "Autographed Liverpool shirt from the 2018/19 Champions League winning season. Mohamed Salah, Egyptian star. Authenticity certificate included.",
         season: "2018/19",
         type: "Home",
+        category: "football-tops",
         condition: "New without tags",
         brand: "New Balance",
         gender: "Men",
@@ -193,6 +198,7 @@ export class MemStorage implements IStorage {
         description: "Autographed shirt from Bayern Munich's historic treble-winning 2012/13 season. Schweinsteiger, German club legend.",
         season: "2012/13",
         type: "Home",
+        category: "football-tops",
         condition: "Excellent condition",
         brand: "Adidas",
         gender: "Men",
@@ -220,6 +226,7 @@ export class MemStorage implements IStorage {
         description: "Historic shirt from Messi's first season at PSG. Autographed by the Argentine star. Limited and numbered edition.",
         season: "2021/22",
         type: "Home",
+        category: "football-tops",
         condition: "New with tags",
         brand: "Nike",
         gender: "Men",
@@ -247,6 +254,7 @@ export class MemStorage implements IStorage {
         description: "Vintage autographed shirt from icon Alessandro Del Piero. Juventus 1996/97 season. Rare collector's piece.",
         season: "1996/97",
         type: "Home",
+        category: "football-tops",
         condition: "Vintage",
         brand: "Umbro",
         gender: "Men",
@@ -274,6 +282,7 @@ export class MemStorage implements IStorage {
         description: "Shirt from Inter Milan's treble-winning 2009/10 season. Autographed by Wesley Sneijder. Iconic away shirt.",
         season: "2009/10",
         type: "Away",
+        category: "football-tops",
         condition: "Excellent condition",
         brand: "Nike",
         gender: "Men",
@@ -301,6 +310,7 @@ export class MemStorage implements IStorage {
         description: "Legendary Arsenal Invincibles 2003/04 shirt. Autographed by Thierry Henry. One of the most iconic shirts in English football history.",
         season: "2003/04",
         type: "Home",
+        category: "football-tops",
         condition: "Vintage",
         brand: "Nike",
         gender: "Men",
@@ -328,6 +338,7 @@ export class MemStorage implements IStorage {
         description: "Autographed shirt from Chelsea's 2011/12 Champions League winning season. Frank Lampard, Blues legend.",
         season: "2011/12",
         type: "Home",
+        category: "football-tops",
         condition: "Good condition",
         brand: "Adidas",
         gender: "Men",
@@ -355,6 +366,7 @@ export class MemStorage implements IStorage {
         description: "Autographed Milan shirt from the 2006/07 season when Kaká won the Ballon d'Or. Champions League patch included.",
         season: "2006/07",
         type: "Home",
+        category: "football-tops",
         condition: "New without tags",
         brand: "Adidas",
         gender: "Men",
@@ -416,6 +428,9 @@ export class MemStorage implements IStorage {
       }
       if (filters.genders && filters.genders.length > 0) {
         products = products.filter((p) => filters.genders!.includes(p.gender));
+      }
+      if (filters.categories && filters.categories.length > 0) {
+        products = products.filter((p) => p.category && filters.categories!.includes(p.category));
       }
       if (filters.minPrice !== undefined) {
         products = products.filter((p) => parseFloat(p.price) >= filters.minPrice!);

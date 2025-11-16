@@ -138,15 +138,16 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
   return (
     <div className="w-full space-y-6 overflow-y-auto pr-2" data-testid="filter-sidebar">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Filters</h2>
+        <h2 className="text-xl font-bold text-gray-900">Filters</h2>
         {activeFilterCount > 0 && (
           <Button
             variant="ghost"
             size="sm"
             onClick={onClearFilters}
+            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
             data-testid="button-clear-filters"
           >
-            Limpar ({activeFilterCount})
+            Clear ({activeFilterCount})
             <X className="ml-2 h-4 w-4" />
           </Button>
         )}

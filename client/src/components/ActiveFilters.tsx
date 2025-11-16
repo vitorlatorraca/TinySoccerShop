@@ -6,9 +6,10 @@ import { X } from "lucide-react";
 interface ActiveFiltersProps {
   filters: FilterOptions;
   onRemoveFilter: (category: keyof FilterOptions, value?: string) => void;
+  onClearAll?: () => void;
 }
 
-export function ActiveFilters({ filters, onRemoveFilter }: ActiveFiltersProps) {
+export function ActiveFilters({ filters, onRemoveFilter, onClearAll }: ActiveFiltersProps) {
   const activeFilters: { category: keyof FilterOptions; label: string; value?: string }[] = [];
 
   if (filters.leagues && filters.leagues.length > 0) {
@@ -78,32 +79,41 @@ export function ActiveFilters({ filters, onRemoveFilter }: ActiveFiltersProps) {
     activeFilters.push({ category: "hasCertificate", label: "With Certificate" });
   }
 
-  if (activeFilters.length === 0) {
-    return null;
-  }
-
   return (
-    <div className="flex flex-wrap items-center gap-2 rounded-lg border bg-muted/50 p-4" data-testid="active-filters">
-      <span className="text-sm font-semibold">Active filters:</span>
-      {activeFilters.map((filter, index) => (
-        <Badge
-          key={`${filter.category}-${filter.value || 'bool'}-${index}`}
-          variant="secondary"
-          className="gap-1 pr-1"
-          data-testid={`badge-active-filter-${index}`}
-        >
-          {filter.label}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-4 w-4 hover:bg-transparent"
-            onClick={() => onRemoveFilter(filter.category, filter.value)}
-            data-testid={`button-remove-filter-${index}`}
-          >
-            <X className="h-3 w-3" />
-          </Button>
-        </Badge>
-      ))}
+    <div className="mb-4" data-testid="active-filters">
+      {activeFilters.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 mb-2">
+          <span className="text-sm font-medium text-gray-700">Active filters</span>
+          {onClearAll && (
+            <button
+              onClick={onClearAll}
+              className="text-sm text-gray-600 hover:text-gray-900 underline"
+            >
+              Clear all
+            </button>
+          )}
+        </div>
+      )}
+      {activeFilters.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2">
+          {activeFilters.map((filter, index) => (
+            <div
+              key={`${filter.category}-${filter.value || 'bool'}-${index}`}
+              className="inline-flex items-center gap-1.5 bg-[#1a5d2e] text-white px-3 py-1.5 rounded-full text-sm font-medium"
+              data-testid={`badge-active-filter-${index}`}
+            >
+              <span>{filter.label}</span>
+              <button
+                onClick={() => onRemoveFilter(filter.category, filter.value)}
+                className="hover:opacity-70 transition-opacity"
+                data-testid={`button-remove-filter-${index}`}
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

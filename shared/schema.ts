@@ -18,6 +18,7 @@ export const products = pgTable("products", {
   description: text("description").notNull(),
   season: text("season").notNull(),
   type: text("type").notNull(),
+  category: text("category").notNull().default("football-tops"),
   condition: text("condition").notNull(),
   brand: text("brand").notNull(),
   gender: text("gender").notNull(),
@@ -80,6 +81,7 @@ export interface FilterOptions {
   conditions?: string[];
   brands?: string[];
   genders?: string[];
+  categories?: string[];
   minPrice?: number;
   maxPrice?: number;
   isAutographed?: boolean;

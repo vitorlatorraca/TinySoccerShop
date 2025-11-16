@@ -1,16 +1,16 @@
 import { useState } from "react";
+import { useRoute, Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { FilterOptions, SortOptions, Product, CartItemWithProduct } from "@shared/schema";
+import { TopBar } from "@/components/TopBar";
 import { Header } from "@/components/Header";
 import { FilterSidebar } from "@/components/FilterSidebar";
+import { CategorySidebar } from "@/components/CategorySidebar";
 import { ProductGrid } from "@/components/ProductGrid";
 import { SortControls } from "@/components/SortControls";
 import { ActiveFilters } from "@/components/ActiveFilters";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { CartPreview } from "@/components/CartPreview";
-import { HeroBanner } from "@/components/HeroBanner";
-import { LegendsSection } from "@/components/LegendsSection";
-import { PopularTeamsSection } from "@/components/PopularTeamsSection";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Filter } from "lucide-react";
@@ -19,6 +19,9 @@ import { queryClient, apiRequest } from "@/lib/queryClient";
 
 export default function Home() {
   const { toast } = useToast();
+  const [, params] = useRoute("/shop/:category");
+  const category = params?.category || "football-tops";
+  
   const [filters, setFilters] = useState<FilterOptions>({});
   const [sortOptions, setSortOptions] = useState<SortOptions>({ sortBy: "relevance", itemsPerPage: 24 });
   const [gridColumns, setGridColumns] = useState<3 | 4>(4);
@@ -26,8 +29,22 @@ export default function Home() {
   const [cartOpen, setCartOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
+  // Add category to filters
+  const categoryMap: Record<string, string> = {
+    "football-tops": "football-tops",
+    "football-bottoms": "football-bottoms",
+    "football-accessories": "football-accessories",
+    "rugby": "rugby",
+    "basketball": "basketball",
+    "other-sports": "other-sports",
+    "all": "",
+  };
+
+  const categoryFilter = category === "all" ? "" : (categoryMap[category] || "football-tops");
+
   const buildQueryString = () => {
     const params = new URLSearchParams();
+    if (categoryFilter) params.set('categories', JSON.stringify([categoryFilter]));
     if (filters.leagues && filters.leagues.length > 0) params.set('leagues', JSON.stringify(filters.leagues));
     if (filters.clubs && filters.clubs.length > 0) params.set('clubs', JSON.stringify(filters.clubs));
     if (filters.nationalTeams && filters.nationalTeams.length > 0) params.set('nationalTeams', JSON.stringify(filters.nationalTeams));
@@ -53,13 +70,6 @@ export default function Home() {
     queryKey: [`/api/products?${queryString}`],
   });
 
-  // Get all products for hero banner and sections (no filters)
-  const { data: allProducts = [] } = useQuery<Product[]>({
-    queryKey: ['/api/products'],
-  });
-
-  // Get featured product for hero banner
-  const featuredProduct = allProducts.find(p => p.featured) || allProducts[0] || null;
 
   const { data: cartItems = [] } = useQuery<CartItemWithProduct[]>({
     queryKey: ['/api/cart'],
@@ -186,65 +196,63 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      <TopBar />
       <Header
         cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
         favoritesCount={favorites.length}
         onCartClick={() => setCartOpen(true)}
       />
 
-      {/* Hero Banner */}
-      <HeroBanner product={featuredProduct} />
-
-      {/* Legends Section */}
-      <LegendsSection products={allProducts} />
-
-      {/* Popular Teams Section */}
-      <PopularTeamsSection products={allProducts} />
+      {/* Breadcrumbs */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <nav className="text-sm text-gray-600">
+            <Link href="/" className="hover:text-gray-900">Home</Link>
+            <span className="mx-2">/</span>
+            <span className="text-gray-900">
+              {category === "all" ? "All Products" : 
+               category === "football-tops" ? "Football Tops" :
+               category === "football-bottoms" ? "Football Bottoms" :
+               category === "football-accessories" ? "Football Accessories" :
+               category === "rugby" ? "Rugby" :
+               category === "basketball" ? "Basketball" :
+               category === "other-sports" ? "Other Sports" : "Football Tops"}
+            </span>
+          </nav>
+        </div>
+      </div>
 
       {/* Products Section with Filters */}
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="flex gap-8">
-          <aside className="hidden w-80 shrink-0 lg:block">
-            <div className="sticky top-24">
-              <FilterSidebar
-                filters={filters}
-                onFilterChange={handleFilterChange}
-                onClearFilters={handleClearFilters}
-              />
-            </div>
-          </aside>
-
-          <main className="flex-1">
-            <div className="mb-6 flex items-center justify-between">
-              <h1 className="text-3xl font-bold">Football Shirts</h1>
-              <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
-                <SheetTrigger asChild className="lg:hidden">
-                  <Button variant="outline" data-testid="button-mobile-filters">
-                    <Filter className="mr-2 h-4 w-4" />
-                    Filters
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-80 overflow-y-auto">
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
+          <div className="flex gap-8">
+            {/* Filter Sidebar */}
+            <aside className="hidden w-64 shrink-0 lg:block">
+              <div className="sticky top-28">
+                <div className="bg-white border border-gray-200 p-4">
                   <FilterSidebar
                     filters={filters}
                     onFilterChange={handleFilterChange}
                     onClearFilters={handleClearFilters}
                   />
-                </SheetContent>
-              </Sheet>
+                </div>
+              </div>
+            </aside>
+
+          <main className="flex-1">
+            {/* Product Count */}
+            <div className="mb-4">
+              <span className="text-lg font-semibold text-[#1a5d2e]">
+                {products.length} {products.length === 1 ? 'PRODUCT' : 'PRODUCTS'}
+              </span>
             </div>
 
+            {/* Active Filters */}
             <div className="mb-6">
-              <ActiveFilters filters={filters} onRemoveFilter={handleRemoveFilter} />
-            </div>
-
-            <div className="mb-6">
-              <SortControls
-                sortOptions={sortOptions}
-                onSortChange={setSortOptions}
-                totalResults={products.length}
-                gridColumns={gridColumns}
-                onGridColumnsChange={setGridColumns}
+              <ActiveFilters 
+                filters={filters} 
+                onRemoveFilter={handleRemoveFilter}
+                onClearAll={handleClearFilters}
               />
             </div>
 
@@ -257,6 +265,7 @@ export default function Home() {
               gridColumns={gridColumns}
             />
           </main>
+          </div>
         </div>
       </div>
 

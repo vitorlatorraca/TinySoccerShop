@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRoute, Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Product, CartItemWithProduct } from "@shared/schema";
+import { TopBar } from "@/components/TopBar";
 import { Header } from "@/components/Header";
 import { CartPreview } from "@/components/CartPreview";
 import { Button } from "@/components/ui/button";
@@ -136,6 +137,7 @@ export default function ProductDetail() {
   if (productLoading) {
     return (
       <div className="min-h-screen bg-background">
+        <TopBar />
         <Header
           cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
           favoritesCount={favorites.length}
@@ -167,6 +169,7 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="min-h-screen bg-background">
+        <TopBar />
         <Header
           cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
           favoritesCount={favorites.length}
@@ -188,6 +191,7 @@ export default function ProductDetail() {
 
   return (
     <div className="min-h-screen bg-background">
+      <TopBar />
       <Header
         cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
         favoritesCount={favorites.length}
