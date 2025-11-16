@@ -213,7 +213,7 @@ export default function ProductDetail() {
             <div className="relative aspect-square overflow-hidden rounded-lg bg-muted">
               <img
                 src={allImages[selectedImage]}
-                alt={mockProduct.name}
+                alt={product.name}
                 className="h-full w-full object-cover"
                 data-testid="img-product-main"
               />
@@ -233,7 +233,7 @@ export default function ProductDetail() {
                   >
                     <img
                       src={image}
-                      alt={`${mockProduct.name} - Imagem ${index + 1}`}
+                      alt={`${product.name} - Imagem ${index + 1}`}
                       className="h-full w-full object-cover"
                     />
                   </button>
