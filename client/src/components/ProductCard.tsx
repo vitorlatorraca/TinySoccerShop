@@ -70,14 +70,14 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
           </div>
 
           <div className="p-4">
-            <h3 className="mb-1 text-sm font-medium text-gray-900 leading-tight line-clamp-2" data-testid={`text-name-${product.id}`}>
+            <h3 className="mb-1 text-[15px] font-semibold text-gray-900 leading-tight line-clamp-2" data-testid={`text-name-${product.id}`}>
               {product.name}
             </h3>
-            <p className="mb-2 text-xs text-gray-600" data-testid={`text-condition-${product.id}`}>
+            <p className="mb-2 text-[12px] text-gray-600" data-testid={`text-condition-${product.id}`}>
               Condition: {conditionLabel}
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-base font-semibold tabular-nums text-gray-900" data-testid={`text-price-${product.id}`}>
+              <span className="text-[18px] font-bold tabular-nums text-gray-900" data-testid={`text-price-${product.id}`}>
                 ${parseFloat(product.price).toFixed(2)}
               </span>
             </div>

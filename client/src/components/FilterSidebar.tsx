@@ -153,191 +153,25 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
         )}
       </div>
 
-      <Accordion type="multiple" defaultValue={["price", "leagues", "sizes"]} className="w-full border-t">
-        <AccordionItem value="price">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-price">
-            FAIXA DE PREÇO
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-4 py-2">
-              <Slider
-                min={0}
-                max={10000}
-                step={100}
-                value={[filters.minPrice || 0, filters.maxPrice || 10000]}
-                onValueChange={handlePriceChange}
-                data-testid="slider-price"
-              />
-              <div className="flex items-center gap-2">
-                <Input
-                  type="number"
-                  placeholder="Mín"
-                  value={filters.minPrice || 0}
-                  onChange={(e) =>
-                    onFilterChange({ ...filters, minPrice: Number(e.target.value) })
-                  }
-                  className="h-9"
-                  data-testid="input-min-price"
-                />
-                <span>-</span>
-                <Input
-                  type="number"
-                  placeholder="Máx"
-                  value={filters.maxPrice || 10000}
-                  onChange={(e) =>
-                    onFilterChange({ ...filters, maxPrice: Number(e.target.value) })
-                  }
-                  className="h-9"
-                  data-testid="input-max-price"
-                />
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+      {/* Sort By (minimal placeholder, to mirror reference) */}
+      <div className="border-t">
+        <div className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b">
+          Sort By
+        </div>
+        <div className="py-3">
+          <select className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+            <option>Newest</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Name: A to Z</option>
+          </select>
+        </div>
+      </div>
 
-        <AccordionItem value="leagues">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-leagues">
-            LIGA / COMPETIÇÃO
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 py-2">
-              {LEAGUES.map((league) => (
-                <div key={league} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`league-${league}`}
-                    checked={filters.leagues?.includes(league)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("leagues", league, checked as boolean)
-                    }
-                    data-testid={`checkbox-league-${league.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label
-                    htmlFor={`league-${league}`}
-                    className="cursor-pointer text-sm font-normal"
-                  >
-                    {league}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="clubs">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-clubs">
-            CLUBES
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 py-2">
-              {CLUBS.map((club) => (
-                <div key={club} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`club-${club}`}
-                    checked={filters.clubs?.includes(club)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("clubs", club, checked as boolean)
-                    }
-                    data-testid={`checkbox-club-${club.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label
-                    htmlFor={`club-${club}`}
-                    className="cursor-pointer text-sm font-normal"
-                  >
-                    {club}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="nationalTeams">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-national-teams">
-            SELEÇÕES NACIONAIS
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 py-2">
-              {NATIONAL_TEAMS.map((team) => (
-                <div key={team} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`national-team-${team}`}
-                    checked={filters.nationalTeams?.includes(team)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("nationalTeams", team, checked as boolean)
-                    }
-                    data-testid={`checkbox-national-team-${team.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label
-                    htmlFor={`national-team-${team}`}
-                    className="cursor-pointer text-sm font-normal"
-                  >
-                    {team}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="seasons">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-seasons">
-            TEMPORADAS
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 py-2">
-              {SEASONS.map((season) => (
-                <div key={season} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`season-${season}`}
-                    checked={filters.seasons?.includes(season)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("seasons", season, checked as boolean)
-                    }
-                    data-testid={`checkbox-season-${season.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label
-                    htmlFor={`season-${season}`}
-                    className="cursor-pointer text-sm font-normal"
-                  >
-                    {season}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="players">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-players">
-            JOGADORES
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 py-2">
-              {PLAYERS.map((player) => (
-                <div key={player} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`player-${player}`}
-                    checked={filters.players?.includes(player)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("players", player, checked as boolean)
-                    }
-                    data-testid={`checkbox-player-${player.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label
-                    htmlFor={`player-${player}`}
-                    className="cursor-pointer text-sm font-normal"
-                  >
-                    {player}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
+      <Accordion type="multiple" defaultValue={["sizes", "price"]} className="w-full border-t">
         <AccordionItem value="sizes">
           <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-sizes">
-            TAMANHO
+            Product Size
           </AccordionTrigger>
           <AccordionContent>
             <div className="grid grid-cols-3 gap-2 py-2">
@@ -362,9 +196,50 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
           </AccordionContent>
         </AccordionItem>
 
+        <AccordionItem value="price">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-price">
+            Price
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-4 py-2">
+              <Slider
+                min={0}
+                max={10000}
+                step={100}
+                value={[filters.minPrice || 0, filters.maxPrice || 10000]}
+                onValueChange={handlePriceChange}
+                data-testid="slider-price"
+              />
+              <div className="flex items-center gap-2">
+                <Input
+                  type="number"
+                  placeholder="Min"
+                  value={filters.minPrice || 0}
+                  onChange={(e) =>
+                    onFilterChange({ ...filters, minPrice: Number(e.target.value) })
+                  }
+                  className="h-9"
+                  data-testid="input-min-price"
+                />
+                <span>-</span>
+                <Input
+                  type="number"
+                  placeholder="Max"
+                  value={filters.maxPrice || 10000}
+                  onChange={(e) =>
+                    onFilterChange({ ...filters, maxPrice: Number(e.target.value) })
+                  }
+                  className="h-9"
+                  data-testid="input-max-price"
+                />
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+
         <AccordionItem value="types">
           <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-types">
-            TIPO
+            Product Style
           </AccordionTrigger>
           <AccordionContent>
             <div className="space-y-3 py-2">
@@ -387,79 +262,22 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="conditions">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-conditions">
-            CONDIÇÃO
+        <AccordionItem value="brands">
+          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-brands">
+            Color
           </AccordionTrigger>
           <AccordionContent>
-            <div className="space-y-3 py-2">
-              {CONDITIONS.map((condition) => (
-                <div key={condition} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`condition-${condition}`}
-                    checked={filters.conditions?.includes(condition)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("conditions", condition, checked as boolean)
-                    }
-                    data-testid={`checkbox-condition-${condition.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label
-                    htmlFor={`condition-${condition}`}
-                    className="cursor-pointer text-sm font-normal"
-                  >
-                    {condition}
-                  </Label>
-                </div>
-              ))}
-            </div>
+            {/* Placeholder list – adjust to real colors when available */}
+            <div className="space-y-3 py-2 text-sm text-gray-600">No color filters available</div>
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="features">
           <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-features">
-            CARACTERÍSTICAS
+            Printed?
           </AccordionTrigger>
           <AccordionContent>
             <div className="space-y-3 py-2">
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="autographed"
-                  checked={filters.isAutographed || false}
-                  onCheckedChange={(checked) =>
-                    handleBooleanChange("isAutographed", checked as boolean)
-                  }
-                  data-testid="checkbox-autographed"
-                />
-                <Label htmlFor="autographed" className="cursor-pointer text-sm font-normal">
-                  Autografada
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="match-worn"
-                  checked={filters.isMatchWorn || false}
-                  onCheckedChange={(checked) =>
-                    handleBooleanChange("isMatchWorn", checked as boolean)
-                  }
-                  data-testid="checkbox-match-worn"
-                />
-                <Label htmlFor="match-worn" className="cursor-pointer text-sm font-normal">
-                  Match Worn
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="limited-edition"
-                  checked={filters.isLimitedEdition || false}
-                  onCheckedChange={(checked) =>
-                    handleBooleanChange("isLimitedEdition", checked as boolean)
-                  }
-                  data-testid="checkbox-limited-edition"
-                />
-                <Label htmlFor="limited-edition" className="cursor-pointer text-sm font-normal">
-                  Edição Limitada
-                </Label>
-              </div>
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="certificate"
@@ -470,59 +288,9 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
                   data-testid="checkbox-certificate"
                 />
                 <Label htmlFor="certificate" className="cursor-pointer text-sm font-normal">
-                  Com Certificado
+                  With Certificate
                 </Label>
               </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="brands">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-brands">
-            MARCA
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 py-2">
-              {BRANDS.map((brand) => (
-                <div key={brand} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`brand-${brand}`}
-                    checked={filters.brands?.includes(brand)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("brands", brand, checked as boolean)
-                    }
-                    data-testid={`checkbox-brand-${brand.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label htmlFor={`brand-${brand}`} className="cursor-pointer text-sm font-normal">
-                    {brand}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="genders">
-          <AccordionTrigger className="flex w-full items-center justify-between py-4 text-[18px] font-semibold border-b" data-testid="accordion-genders">
-            GÊNERO
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 py-2">
-              {GENDERS.map((gender) => (
-                <div key={gender} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`gender-${gender}`}
-                    checked={filters.genders?.includes(gender)}
-                    onCheckedChange={(checked) =>
-                      handleCheckboxChange("genders", gender, checked as boolean)
-                    }
-                    data-testid={`checkbox-gender-${gender.toLowerCase().replace(/\s+/g, '-')}`}
-                  />
-                  <Label htmlFor={`gender-${gender}`} className="cursor-pointer text-sm font-normal">
-                    {gender}
-                  </Label>
-                </div>
-              ))}
             </div>
           </AccordionContent>
         </AccordionItem>

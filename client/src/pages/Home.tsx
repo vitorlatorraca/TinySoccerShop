@@ -240,9 +240,12 @@ export default function Home() {
             </aside>
 
           <main className="flex-1">
-            {/* Product Count */}
-            <div className="mb-4">
-              <span className="text-lg font-semibold text-[#1a5d2e]">
+            {/* Minimalistic results header */}
+            <div className="mb-6 flex items-center justify-between">
+              <h1 className="text-2xl font-extrabold tracking-tight uppercase">
+                Search Results
+              </h1>
+              <span className="text-sm font-semibold text-[#1a5d2e]">
                 {products.length} {products.length === 1 ? 'PRODUCT' : 'PRODUCTS'}
               </span>
             </div>
