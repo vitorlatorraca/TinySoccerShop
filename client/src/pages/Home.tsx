@@ -205,18 +205,18 @@ export default function Home() {
 
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2">
           <nav className="text-sm text-gray-600">
             <Link href="/" className="hover:text-gray-900">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-gray-900">
-              {category === "all" ? "All Products" : 
+              Search results for: '{category === "all" ? "All Products" : 
                category === "football-tops" ? "Football Tops" :
                category === "football-bottoms" ? "Football Bottoms" :
                category === "football-accessories" ? "Football Accessories" :
                category === "rugby" ? "Rugby" :
                category === "basketball" ? "Basketball" :
-               category === "other-sports" ? "Other Sports" : "Football Tops"}
+               category === "other-sports" ? "Other Sports" : "Football Tops"}'
             </span>
           </nav>
         </div>
@@ -240,12 +240,18 @@ export default function Home() {
             </aside>
 
           <main className="flex-1">
-            {/* Minimalistic results header */}
-            <div className="mb-6 flex items-center justify-between">
-              <h1 className="text-2xl font-extrabold tracking-tight uppercase">
-                Search Results
+            {/* Results header - EXACT CFS style */}
+            <div className="mb-6 flex items-baseline justify-between">
+              <h1 className="text-3xl font-bold tracking-tight uppercase text-black">
+                SEARCH RESULTS FOR: '{category === "all" ? "ALL PRODUCTS" : 
+                 category === "football-tops" ? "FOOTBALL TOPS" :
+                 category === "football-bottoms" ? "FOOTBALL BOTTOMS" :
+                 category === "football-accessories" ? "FOOTBALL ACCESSORIES" :
+                 category === "rugby" ? "RUGBY" :
+                 category === "basketball" ? "BASKETBALL" :
+                 category === "other-sports" ? "OTHER SPORTS" : "FOOTBALL TOPS"}'
               </h1>
-              <span className="text-sm font-semibold text-[#1a5d2e]">
+              <span className="text-base font-bold text-[#1a5d2e] ml-4">
                 {products.length} {products.length === 1 ? 'PRODUCT' : 'PRODUCTS'}
               </span>
             </div>

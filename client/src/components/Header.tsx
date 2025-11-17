@@ -53,9 +53,9 @@ export function Header({ cartItemCount, onCartClick }: HeaderProps) {
                 <Shield className="h-8 w-8" />
               </div>
               <div className="hidden sm:flex flex-col">
-                <span className="text-white text-xl font-bold leading-tight">TINY</span>
-                <span className="text-white text-xl font-bold leading-tight">SOCCER</span>
-                <span className="text-white text-xl font-bold leading-tight">SHOP</span>
+                <span className="text-white text-sm font-bold leading-tight">CLASSIC</span>
+                <span className="text-white text-lg font-bold leading-tight">FOOTBALL</span>
+                <span className="text-white text-lg font-bold leading-tight">SHIRTS</span>
               </div>
             </Link>
 
