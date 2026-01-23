@@ -79,7 +79,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (existingItem) {
         const updatedItem = await storage.updateCartItem(
           existingItem.id,
-          existingItem.quantity + validatedData.quantity
+          existingItem.quantity + (validatedData.quantity ?? 1)
         );
         if (!updatedItem) {
           return res.status(404).json({ error: "Cart item not found" });

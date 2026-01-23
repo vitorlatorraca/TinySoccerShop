@@ -386,6 +386,11 @@ export class MemStorage implements IStorage {
       const id = randomUUID();
       const fullProduct: Product = {
         ...product,
+        category: product.category ?? "football-tops",
+        player: product.player ?? null,
+        nationalTeam: product.nationalTeam ?? null,
+        imageHoverUrl: product.imageHoverUrl ?? null,
+        images: product.images ?? [],
         id,
         createdAt: new Date().toISOString(),
       };
@@ -501,6 +506,10 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const product: Product = {
       ...insertProduct,
+      category: insertProduct.category ?? "football-tops",
+      player: insertProduct.player ?? null,
+      nationalTeam: insertProduct.nationalTeam ?? null,
+      imageHoverUrl: insertProduct.imageHoverUrl ?? null,
       id,
       createdAt: new Date().toISOString(),
     };
@@ -518,7 +527,11 @@ export class MemStorage implements IStorage {
 
   async createCartItem(insertItem: InsertCartItem): Promise<CartItem> {
     const id = randomUUID();
-    const item: CartItem = { ...insertItem, id };
+    const item: CartItem = { 
+      ...insertItem, 
+      quantity: insertItem.quantity ?? 1,
+      id 
+    };
     this.cartItems.set(id, item);
     return item;
   }
