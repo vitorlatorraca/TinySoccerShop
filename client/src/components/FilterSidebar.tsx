@@ -138,13 +138,13 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
   return (
     <div className="w-full space-y-6 overflow-y-auto pr-2" data-testid="filter-sidebar">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-900">Filters</h2>
+        <h2 className="text-xl font-bold text-foreground">Filters</h2>
         {activeFilterCount > 0 && (
           <Button
             variant="ghost"
             size="sm"
             onClick={onClearFilters}
-            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+            className="text-primary hover:text-primary hover:bg-muted"
             data-testid="button-clear-filters"
           >
             Clear ({activeFilterCount})
@@ -159,7 +159,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
           Sort By
         </div>
         <div className="py-3">
-          <select className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+          <select className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground">
             <option>Newest</option>
             <option>Price: Low to High</option>
             <option>Price: High to Low</option>
@@ -268,7 +268,7 @@ export function FilterSidebar({ filters, onFilterChange, onClearFilters }: Filte
           </AccordionTrigger>
           <AccordionContent>
             {/* Placeholder list – adjust to real colors when available */}
-            <div className="space-y-3 py-2 text-sm text-gray-600">No color filters available</div>
+            <div className="space-y-3 py-2 text-sm text-muted-foreground">No color filters available</div>
           </AccordionContent>
         </AccordionItem>
 

@@ -83,11 +83,11 @@ export function ActiveFilters({ filters, onRemoveFilter, onClearAll }: ActiveFil
     <div className="mb-4" data-testid="active-filters">
       {activeFilters.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 mb-2">
-          <span className="text-sm font-medium text-gray-700">Active filters</span>
+          <span className="text-sm font-medium text-foreground">Active filters</span>
           {onClearAll && (
             <button
               onClick={onClearAll}
-              className="text-sm text-gray-600 hover:text-gray-900 underline"
+              className="text-sm text-muted-foreground hover:text-foreground underline"
             >
               Clear all
             </button>
@@ -99,7 +99,7 @@ export function ActiveFilters({ filters, onRemoveFilter, onClearAll }: ActiveFil
           {activeFilters.map((filter, index) => (
             <div
               key={`${filter.category}-${filter.value || 'bool'}-${index}`}
-              className="inline-flex items-center gap-1.5 bg-[#1a5d2e] text-white px-3 py-1.5 rounded-full text-sm font-medium"
+              className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-3 py-1.5 rounded-full text-sm font-medium"
               data-testid={`badge-active-filter-${index}`}
             >
               <span>{filter.label}</span>

@@ -33,13 +33,13 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
 
   return (
     <Card
-      className="group relative overflow-hidden border border-gray-200 bg-white transition-all duration-300 hover:shadow-md"
+      className="group relative overflow-hidden transition-all duration-300 hover:shadow-md"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       data-testid={`card-product-${product.id}`}
     >
       <Link href={`/product/${product.slug}`} className="block">
-          <div className="relative aspect-square overflow-hidden bg-white">
+          <div className="relative aspect-square overflow-hidden bg-muted">
             <img
               src={displayImage}
               alt={product.name}
@@ -49,7 +49,7 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
             {/* Multiple Sizes badge - CFS style */}
             {product.sizes && product.sizes.length > 1 && (
               <div className="absolute left-0 top-0">
-                <div className="bg-[#1a5d2e] text-white text-[10px] font-bold px-2 py-1 transform -rotate-12 origin-top-left">
+                <div className="bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 transform -rotate-12 origin-top-left">
                   MULTIPLE SIZES
                 </div>
               </div>
@@ -60,7 +60,7 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
                   <Badge
                     key={index}
                     variant={badge.variant}
-                    className="text-xs bg-[#1a5d2e] text-white"
+                    className="text-xs bg-primary text-primary-foreground"
                     data-testid={`badge-${badge.text.toLowerCase().replace(/\s+/g, '-')}-${product.id}`}
                   >
                     {badge.text}
@@ -78,14 +78,14 @@ export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView
           </div>
 
           <div className="p-4">
-            <h3 className="mb-1 text-base font-bold text-black leading-tight line-clamp-2" data-testid={`text-name-${product.id}`}>
+            <h3 className="mb-1 text-base font-bold text-card-foreground leading-tight line-clamp-2" data-testid={`text-name-${product.id}`}>
               {product.name}
             </h3>
-            <p className="mb-2 text-sm text-black font-normal" data-testid={`text-condition-${product.id}`}>
+            <p className="mb-2 text-sm text-muted-foreground font-normal" data-testid={`text-condition-${product.id}`}>
               Condition: {conditionLabel}
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-xl font-bold tabular-nums text-black" data-testid={`text-price-${product.id}`}>
+              <span className="text-xl font-bold tabular-nums text-card-foreground" data-testid={`text-price-${product.id}`}>
                 ${parseFloat(product.price).toFixed(2)}
               </span>
             </div>

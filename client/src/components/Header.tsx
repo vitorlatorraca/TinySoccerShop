@@ -43,7 +43,7 @@ export function Header({ cartItemCount, onCartClick }: HeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border">
       <div className="bg-[#1a5d2e]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -93,13 +93,13 @@ export function Header({ cartItemCount, onCartClick }: HeaderProps) {
                   </div>
                   <nav className="flex flex-col">
                     {menuCategories.map((cat, index) => (
-                      <div key={cat.name} className="border-b border-gray-200">
+                      <div key={cat.name} className="border-b border-border">
                         <Link 
                           href="/shop/all" 
-                          className="flex items-center justify-between px-4 py-4 text-sm font-medium hover:bg-gray-50 transition-colors"
+                          className="flex items-center justify-between px-4 py-4 text-sm font-medium hover:bg-muted transition-colors"
                         >
                           <span>{cat.name}</span>
-                          {cat.hasSubmenu && <ChevronDown className="h-4 w-4 text-gray-400" />}
+                          {cat.hasSubmenu && <ChevronDown className="h-4 w-4 text-muted-foreground" />}
                         </Link>
                       </div>
                     ))}

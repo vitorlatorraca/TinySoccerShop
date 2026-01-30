@@ -204,12 +204,12 @@ export default function Home() {
       />
 
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2">
-          <nav className="text-sm text-gray-600">
-            <Link href="/" className="hover:text-gray-900">Home</Link>
+          <nav className="text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground">Home</Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-900">
+            <span className="text-foreground">
               Search results for: '{category === "all" ? "All Products" : 
                category === "football-tops" ? "Football Tops" :
                category === "football-bottoms" ? "Football Bottoms" :
@@ -223,13 +223,13 @@ export default function Home() {
       </div>
 
       {/* Products Section with Filters */}
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex gap-8">
             {/* Filter Sidebar */}
             <aside className="hidden w-64 shrink-0 lg:block">
               <div className="sticky top-28">
-                <div className="bg-white border border-gray-200 p-4">
+                <div className="bg-card border border-card-border p-4">
                   <FilterSidebar
                     filters={filters}
                     onFilterChange={handleFilterChange}
@@ -242,7 +242,7 @@ export default function Home() {
           <main className="flex-1">
             {/* Results header - EXACT CFS style */}
             <div className="mb-6 flex items-baseline justify-between">
-              <h1 className="text-3xl font-bold tracking-tight uppercase text-black">
+              <h1 className="text-3xl font-bold tracking-tight uppercase text-foreground">
                 SEARCH RESULTS FOR: '{category === "all" ? "ALL PRODUCTS" : 
                  category === "football-tops" ? "FOOTBALL TOPS" :
                  category === "football-bottoms" ? "FOOTBALL BOTTOMS" :
@@ -251,7 +251,7 @@ export default function Home() {
                  category === "basketball" ? "BASKETBALL" :
                  category === "other-sports" ? "OTHER SPORTS" : "FOOTBALL TOPS"}'
               </h1>
-              <span className="text-base font-bold text-[#1a5d2e] ml-4">
+              <span className="text-base font-bold text-primary ml-4">
                 {products.length} {products.length === 1 ? 'PRODUCT' : 'PRODUCTS'}
               </span>
             </div>

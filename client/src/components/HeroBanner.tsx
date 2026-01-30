@@ -46,7 +46,7 @@ export function HeroBanner({ product }: HeroBannerProps) {
             <Link href={`/product/${product.slug}`}>
               <Button 
                 size="lg" 
-                className="bg-white text-gray-900 hover:bg-gray-100 font-semibold"
+                className="bg-background text-foreground hover:bg-muted font-semibold"
               >
                 SHOP NOW
                 <ArrowRight className="ml-2 h-4 w-4" />

@@ -40,7 +40,7 @@ export function CategorySidebar({ currentCategory }: CategorySidebarProps) {
   return (
     <div className="w-full space-y-8" data-testid="category-sidebar">
       <div>
-        <h2 className="mb-5 text-xl font-bold text-gray-900">Browse by category</h2>
+        <h2 className="mb-5 text-xl font-bold text-foreground">Browse by category</h2>
         <nav className="space-y-1">
           {mainCategories.map((category) => {
             const isActive = location === category.path || 
@@ -53,8 +53,8 @@ export function CategorySidebar({ currentCategory }: CategorySidebarProps) {
                   className={cn(
                     "block rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-200",
                     isActive
-                      ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-blue-600 hover:translate-x-1"
+                      ? "bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-md"
+                      : "text-muted-foreground hover:bg-muted hover:text-primary hover:translate-x-1"
                   )}
                 >
                   {category.name}
@@ -66,13 +66,13 @@ export function CategorySidebar({ currentCategory }: CategorySidebarProps) {
       </div>
 
       <div>
-        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-400">
+        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
           More Categories
         </h3>
         <nav className="space-y-1">
           {subCategories.map((category) => (
             <Link key={category.path} href={category.path}>
-              <a className="block rounded-lg px-3 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-medium">
+              <a className="block rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:bg-muted hover:text-primary transition-all duration-200 font-medium">
                 {category.name}
               </a>
             </Link>
@@ -81,10 +81,10 @@ export function CategorySidebar({ currentCategory }: CategorySidebarProps) {
       </div>
 
       <div>
-        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-gray-400">
+        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
           Price range (CAD$)
         </h3>
-        <select className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+        <select className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm font-medium text-foreground shadow-sm hover:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-colors">
           <option>All prices</option>
           <option>Under $50</option>
           <option>$50 - $100</option>
