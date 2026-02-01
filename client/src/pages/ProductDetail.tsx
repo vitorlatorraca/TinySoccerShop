@@ -136,7 +136,7 @@ export default function ProductDetail() {
 
   if (productLoading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background floodlit">
         <TopBar />
         <Header
           cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
@@ -168,7 +168,7 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background floodlit">
         <TopBar />
         <Header
           cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
@@ -190,7 +190,7 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background floodlit">
       <TopBar />
       <Header
         cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
@@ -210,11 +210,11 @@ export default function ProductDetail() {
 
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="space-y-4">
-            <div className="relative aspect-square overflow-hidden rounded-lg bg-muted">
+            <div className="relative aspect-square overflow-hidden rounded-none bg-card border border-border/60">
               <img
                 src={allImages[selectedImage]}
                 alt={product.name}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain p-6 sm:p-8"
                 data-testid="img-product-main"
               />
             </div>
@@ -234,7 +234,7 @@ export default function ProductDetail() {
                     <img
                       src={image}
                       alt={`${product.name} - Imagem ${index + 1}`}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-contain p-2"
                     />
                   </button>
                 ))}

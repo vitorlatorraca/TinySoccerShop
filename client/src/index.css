@@ -14,25 +14,26 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 0 0% 100%;
+  /* Museum-like neutral base (let jerseys be the color) */
+  --background: 38 22% 97%;
 
-  --foreground: 222 47% 11%;
+  --foreground: 222 28% 10%;
 
-  --border: 214 32% 91%;
+  --border: 30 12% 88%;
 
-  --card: 0 0% 100%;
+  --card: 38 22% 98%;
 
-  --card-foreground: 222 47% 11%;
+  --card-foreground: 222 28% 10%;
 
-  --card-border: 214 32% 91%;
+  --card-border: 30 12% 88%;
 
-  --sidebar: 210 15% 97%;
+  --sidebar: 38 22% 96%;
 
-  --sidebar-foreground: 210 20% 12%;
+  --sidebar-foreground: 222 28% 10%;
 
-  --sidebar-border: 210 12% 90%;
+  --sidebar-border: 30 12% 88%;
 
-  --sidebar-primary: 211 100% 10%;
+  --sidebar-primary: 222 28% 10%;
 
   --sidebar-primary-foreground: 0 0% 100%;
 
@@ -40,29 +41,30 @@
 
   --sidebar-accent-foreground: 210 20% 12%;
 
-  --sidebar-ring: 211 100% 10%;
+  --sidebar-ring: 43 77% 52%;
 
-  --popover: 0 0% 100%;
+  --popover: 38 22% 98%;
 
-  --popover-foreground: 210 20% 12%;
+  --popover-foreground: 222 28% 10%;
 
-  --popover-border: 210 12% 88%;
+  --popover-border: 30 12% 88%;
 
-  --primary: 221 83% 53%;
+  /* Primary actions are ink-black; gold is used as an accent/focus meaning */
+  --primary: 222 28% 10%;
 
-  --primary-foreground: 0 0% 100%;
+  --primary-foreground: 38 22% 97%;
 
-  --secondary: 210 40% 96%;
+  --secondary: 38 18% 94%;
 
-  --secondary-foreground: 222 47% 11%;
+  --secondary-foreground: 222 28% 10%;
 
-  --muted: 210 40% 96%;
+  --muted: 38 18% 94%;
 
-  --muted-foreground: 215 16% 47%;
+  --muted-foreground: 25 10% 42%;
 
-  --accent: 221 83% 53%;
+  --accent: 43 77% 52%;
 
-  --accent-foreground: 0 0% 100%;
+  --accent-foreground: 222 28% 10%;
 
   --gold: 43 77% 52%;
 
@@ -72,8 +74,8 @@
 
   --destructive-foreground: 0 0% 98%;
 
-  --input: 220 13% 82%;
-  --ring: 212 95% 32%;
+  --input: 30 10% 82%;
+  --ring: 43 77% 52%;
   --chart-1: 212 95% 32%;
   --chart-2: 142 76% 36%;
   --chart-3: 45 93% 47%;
@@ -81,7 +83,8 @@
   --chart-5: 17 88% 40%;
 
   --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-serif: Georgia, serif;
+  --font-display: Fraunces, ui-serif, Georgia, serif;
+  --font-serif: Fraunces, ui-serif, Georgia, serif;
   --font-mono: Menlo, monospace;
   --radius: .5rem; /* 8px */
   --shadow-2xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -252,6 +255,26 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+
+  /* Floodlit Archives: page-scoped palette + typography */
+  .floodlit {
+    --background: 220 18% 6%;
+    --foreground: 0 0% 98%;
+    --border: 220 10% 16%;
+    --card: 220 15% 8%;
+    --card-foreground: 0 0% 98%;
+    --card-border: 220 10% 16%;
+
+    --muted: 220 10% 12%;
+    --muted-foreground: 220 8% 62%;
+
+    /* “Referee yellow” = meaning (focus / active) */
+    --primary: 46 100% 55%;
+    --primary-foreground: 220 20% 8%;
+    --accent: 46 100% 55%;
+    --accent-foreground: 220 20% 8%;
+    --ring: 46 100% 55%;
+  }
 }
 
 /**
@@ -373,5 +396,255 @@
   
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Floodlit Archives — editorial type system */
+  .floodlit-kicker {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .floodlit-wordmark-kicker {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .floodlit-wordmark-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .floodlit-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 0.88;
+    margin-top: 0.75rem;
+    font-size: clamp(3.25rem, 6.6vw, 6.75rem);
+  }
+
+  .floodlit-lede {
+    margin-top: 1rem;
+    max-width: 52ch;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .floodlit-section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  }
+
+  .floodlit-price {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    white-space: nowrap;
+  }
+
+  .floodlit-meta {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .floodlit-club-hero {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    line-height: 1;
+    margin-top: 0.65rem;
+  }
+
+  .floodlit-club {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+    line-height: 1;
+    margin-top: 0.65rem;
+  }
+
+  .floodlit-name {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: hsl(var(--foreground));
+  }
+
+  /* Floodlit Archives — backgrounds & object treatment */
+  .floodlit-bg {
+    background:
+      radial-gradient(900px 520px at 70% 10%, hsl(0 0% 100% / 0.10) 0%, transparent 55%),
+      radial-gradient(800px 520px at 10% 25%, hsl(46 100% 55% / 0.10) 0%, transparent 60%),
+      linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
+  }
+
+  .floodlit-spotlight {
+    background:
+      radial-gradient(520px 380px at 70% 30%, hsl(0 0% 100% / 0.07) 0%, transparent 60%),
+      radial-gradient(520px 380px at 30% 20%, hsl(46 100% 55% / 0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 260ms ease-out;
+  }
+
+  .group:hover .floodlit-spotlight,
+  .group:focus-within .floodlit-spotlight {
+    opacity: 1;
+  }
+
+  .floodlit-jersey {
+    filter:
+      drop-shadow(0 26px 38px rgba(0, 0, 0, 0.45))
+      drop-shadow(0 2px 10px rgba(0, 0, 0, 0.25));
+    will-change: transform;
+  }
+
+  /* Layout: asymmetrical exhibition (break the grid-farm pattern) */
+  .floodlit-exhibits {
+    display: grid;
+    gap: clamp(1rem, 2.2vw, 2rem);
+    margin-top: 2.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    .floodlit-exhibits {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-auto-rows: minmax(240px, auto);
+      align-items: end;
+    }
+
+    .floodlit-exhibits-item {
+      grid-column: span 6;
+    }
+
+    /* Intentional negative space + rivalry proximity */
+    .floodlit-exhibits-item[data-layout="barcelona"] {
+      grid-column: 1 / span 5;
+      grid-row: 1 / span 2;
+      margin-top: 2.5rem;
+    }
+
+    .floodlit-exhibits-item[data-layout="ac-milan"] {
+      grid-column: 7 / span 6;
+      grid-row: 1 / span 1;
+    }
+
+    .floodlit-exhibits-item[data-layout="chelsea"] {
+      grid-column: 6 / span 7;
+      grid-row: 2 / span 1;
+      margin-top: 1.75rem;
+    }
+
+    .floodlit-exhibits-item[data-layout="corinthians"] {
+      grid-column: 2 / span 6;
+      grid-row: 3 / span 1;
+    }
+  }
+}
+
+@layer utilities {
+  /* Archive / museum-like editorial system (homepage) */
+  .archive-kicker {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .archive-title {
+    font-family: var(--font-display);
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+    font-size: clamp(2.9rem, 6.6vw, 5.5rem);
+  }
+
+  .archive-subtitle {
+    margin-top: 1rem;
+    max-width: 60ch;
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.7;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .archive-section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    font-size: clamp(1.6rem, 2.4vw, 2.25rem);
+  }
+
+  .archive-rule {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--border)),
+      transparent
+    );
+  }
+
+  /* Subtle “stadium” micro-texture: no photos, no gradients-heavy look */
+  .archive-hero-texture {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .archive-hero-texture::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 20% 20%, hsl(0 0% 0% / 0.06) 0 1px, transparent 1px 100%),
+      radial-gradient(circle at 80% 35%, hsl(0 0% 0% / 0.05) 0 1px, transparent 1px 100%),
+      repeating-linear-gradient(
+        90deg,
+        hsl(0 0% 0% / 0.04) 0 1px,
+        transparent 1px 18px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        hsl(0 0% 0% / 0.03) 0 1px,
+        transparent 1px 22px
+      );
+    opacity: 0.35;
+    -webkit-mask-image: radial-gradient(80% 65% at 40% 30%, #000 0%, transparent 70%);
+    mask-image: radial-gradient(80% 65% at 40% 30%, #000 0%, transparent 70%);
+  }
+
+  .archive-brand {
+    font-family: var(--font-display);
+  }
+
+  .archive-jersey {
+    filter:
+      drop-shadow(0 22px 28px rgba(0, 0, 0, 0.14))
+      drop-shadow(0 2px 10px rgba(0, 0, 0, 0.08));
+    will-change: transform;
   }
 }

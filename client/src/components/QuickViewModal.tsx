@@ -46,11 +46,11 @@ export function QuickViewModal({
           <DialogTitle className="sr-only">Visualização Rápida</DialogTitle>
         </DialogHeader>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="relative aspect-square overflow-hidden rounded-lg bg-muted">
+          <div className="relative aspect-square overflow-hidden rounded-none bg-card border border-border/60">
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain p-6 sm:p-8"
               data-testid="img-quick-view-product"
             />
             {!product.inStock && (

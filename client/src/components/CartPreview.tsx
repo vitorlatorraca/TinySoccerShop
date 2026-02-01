@@ -56,7 +56,7 @@ export function CartPreview({ open, onClose, items, onRemoveItem, onUpdateQuanti
                   <img
                     src={item.product.imageUrl}
                     alt={item.product.name}
-                    className="h-20 w-20 rounded-md object-cover"
+                    className="h-20 w-20 rounded-none object-contain bg-card border border-border/60 p-2"
                     data-testid={`img-cart-item-${item.id}`}
                   />
                   <div className="flex flex-1 flex-col">

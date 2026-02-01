@@ -1,5 +1,4 @@
 import { Product } from "@shared/schema";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { Link } from "wouter";
@@ -11,86 +10,60 @@ interface ProductCardProps {
   onQuickView: (product: Product) => void;
 }
 
-export function ProductCard({ product, onFavoriteToggle, isFavorite, onQuickView }: ProductCardProps) {
+export function ProductCard({
+  product,
+  onFavoriteToggle: _onFavoriteToggle,
+  isFavorite: _isFavorite,
+  onQuickView: _onQuickView,
+}: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-
-  const getBadges = () => {
-    const badges = [];
-    if (product.isAutographed) badges.push({ text: "AUTOGRAPHED", variant: "default" as const });
-    if (product.isLimitedEdition) badges.push({ text: "LIMITED EDITION", variant: "secondary" as const });
-    if (product.featured) badges.push({ text: "FEATURED", variant: "destructive" as const });
-    return badges;
-  };
-
-  const badges = getBadges();
   const displayImage = isHovered && product.imageHoverUrl ? product.imageHoverUrl : product.imageUrl;
-
-  const conditionLabel = product.condition === "New with tags" ? "Brand New" :
-                        product.condition === "Excellent condition" ? "Brand New" :
-                        product.condition === "New without tags" ? "Brand New" :
-                        product.condition === "Good condition" ? "Good" :
-                        product.condition || "Brand New";
 
   return (
     <Card
-      className="group relative overflow-hidden transition-all duration-300 hover:shadow-md"
+      className={[
+        "group relative overflow-hidden rounded-none",
+        "border border-border/70 bg-card",
+        "transition-transform duration-200 ease-out",
+        "hover:-translate-y-1 hover:shadow-[0_22px_40px_rgba(0,0,0,0.08)]",
+      ].join(" ")}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       data-testid={`card-product-${product.id}`}
     >
       <Link href={`/product/${product.slug}`} className="block">
-          <div className="relative aspect-square overflow-hidden bg-muted">
+        <div className="px-6 pt-7 sm:px-7 sm:pt-8">
+          <p className="archive-kicker">JERSEY • EDITION</p>
+          <h3 className="mt-2 font-medium tracking-[-0.01em]">{product.club}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-2">{product.name}</p>
+        </div>
+
+        <div className="px-6 pb-2 pt-6 sm:px-7 sm:pt-7">
+          {/* STRICT: product area = PNG jersey only, isolated, object-contain */}
+          <div className="relative aspect-[4/5] overflow-visible">
             <img
               src={displayImage}
               alt={product.name}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className={[
+                "archive-jersey absolute inset-0 m-auto h-full w-full object-contain",
+                "transition-transform duration-200 ease-out",
+                "group-hover:scale-[1.04]",
+              ].join(" ")}
+              loading="lazy"
               data-testid={`img-product-${product.id}`}
             />
-            {/* Multiple Sizes badge - CFS style */}
-            {product.sizes && product.sizes.length > 1 && (
-              <div className="absolute left-0 top-0">
-                <div className="bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 transform -rotate-12 origin-top-left">
-                  MULTIPLE SIZES
-                </div>
-              </div>
-            )}
-            {badges.length > 0 && (!product.sizes || product.sizes.length <= 1) && (
-              <div className="absolute left-2 top-2 flex flex-col gap-1">
-                {badges.map((badge, index) => (
-                  <Badge
-                    key={index}
-                    variant={badge.variant}
-                    className="text-xs bg-primary text-primary-foreground"
-                    data-testid={`badge-${badge.text.toLowerCase().replace(/\s+/g, '-')}-${product.id}`}
-                  >
-                    {badge.text}
-                  </Badge>
-                ))}
-              </div>
-            )}
-            {!product.inStock && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/60">
-                <Badge variant="secondary" className="text-sm">
-                  OUT OF STOCK
-                </Badge>
-              </div>
-            )}
           </div>
+        </div>
 
-          <div className="p-4">
-            <h3 className="mb-1 text-base font-bold text-card-foreground leading-tight line-clamp-2" data-testid={`text-name-${product.id}`}>
-              {product.name}
-            </h3>
-            <p className="mb-2 text-sm text-muted-foreground font-normal" data-testid={`text-condition-${product.id}`}>
-              Condition: {conditionLabel}
+        <div className="px-6 pb-7 sm:px-7 sm:pb-8">
+          <div className="flex items-center justify-between gap-4">
+            <p className="font-semibold tabular-nums tracking-[0.02em]" data-testid={`text-price-${product.id}`}>
+              ${parseFloat(product.price).toFixed(2)}
             </p>
-            <div className="flex items-baseline gap-1">
-              <span className="text-xl font-bold tabular-nums text-card-foreground" data-testid={`text-price-${product.id}`}>
-                ${parseFloat(product.price).toFixed(2)}
-              </span>
-            </div>
+            <p className="text-xs tracking-[0.22em] uppercase text-muted-foreground">{product.league}</p>
           </div>
-        </Link>
+        </div>
+      </Link>
       </Card>
     );
 }
