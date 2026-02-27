@@ -1,0 +1,72 @@
+---
+description: Use the portfolio image prompt-base for all asset generation requests
+alwaysApply: true
+---
+
+# Prompt base para gerar imagens (uso geral)
+
+Sempre que o usuário pedir para gerar imagens/briefings de assets, use **este prompt como base** e **só altere/preencha** os trechos marcados como `[VARIÁVEL]` (por exemplo: `CATEGORY`, `SUBCATEGORY`, `CATEGORY NOTES`).
+
+```text
+You are creating a professional asset library for a premium frontend portfolio.
+
+Generate a high-quality image intended for:
+Folder path: assets/images/[CATEGORY]/[SUBCATEGORY]
+
+Context:
+- This image will be used in a real production React/Next.js project
+- Must be clean, modern, professional, and scalable
+- Visual style must match a high-end tech portfolio
+
+Specifications:
+- Resolution: 4K (3840x2160) or higher
+- Format: PNG
+- Background: transparent OR solid neutral background
+- No text embedded in the image
+- No watermarks
+- No mock UI text
+
+Style:
+- Minimalist
+- Premium
+- Modern tech aesthetic
+- Soft shadows
+- Balanced lighting
+- Consistent color palette
+- Subtle depth, no clutter
+
+Color Palette:
+- Use neutral tones with accent colors suitable for a developer portfolio
+- Avoid over-saturated or cartoonish colors
+
+Composition:
+- Centered subject
+- Plenty of negative space
+- Designed to be easily cropped for desktop, tablet, and mobile
+
+Usage:
+- Must work for both light and dark themes
+- Should not overpower surrounding UI
+- Designed to be reusable across multiple sections
+
+Category-specific notes:
+[CATEGORY NOTES – ex: hero image, project thumbnail, illustration, UI background]
+
+Output:
+- One single, clean, production-ready image
+
+Example (Futtwitter – thumbnail)
+Generate a project thumbnail for a football-based social media platform.
+
+Folder path: assets/images/projects/futtwitter/thumbnails
+
+Style:
+- Modern sports tech
+- Dark background
+- Subtle football references (stadium lights, pitch texture)
+- Clean UI-inspired composition
+- Premium startup aesthetic
+
+No logos, no text, no players' faces.
+```
+

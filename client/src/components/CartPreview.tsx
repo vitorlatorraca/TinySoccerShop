@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetFooter,
 } from "@/components/ui/sheet";
-import { X, ShoppingBag } from "lucide-react";
+import { X, ShoppingBag, Minus, Plus, Truck } from "lucide-react";
 import { Link } from "wouter";
 
 interface CartPreviewProps {
@@ -23,88 +23,125 @@ export function CartPreview({ open, onClose, items, onRemoveItem, onUpdateQuanti
     (sum, item) => sum + parseFloat(item.product.price) * item.quantity,
     0
   );
+  const freeShippingThreshold = 150;
+  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
 
   return (
     <Sheet open={open} onOpenChange={onClose}>
-      <SheetContent side="right" className="w-full sm:max-w-lg" data-testid="sheet-cart-preview">
-        <SheetHeader>
-          <SheetTitle className="flex items-center gap-2">
-            <ShoppingBag className="h-5 w-5" />
-            Carrinho ({items.length})
+      <SheetContent side="right" className="w-full sm:max-w-md flex flex-col" data-testid="sheet-cart-preview">
+        <SheetHeader className="border-b border-border/30 pb-4">
+          <SheetTitle className="text-base font-semibold tracking-[-0.01em]">
+            Cart ({items.reduce((sum, item) => sum + item.quantity, 0)})
           </SheetTitle>
         </SheetHeader>
 
-        <div className="mt-8 flex-1 overflow-y-auto">
-          {items.length === 0 ? (
-            <div className="flex h-64 flex-col items-center justify-center text-center">
-              <ShoppingBag className="mb-4 h-16 w-16 text-muted-foreground" />
-              <p className="mb-2 text-lg font-semibold" data-testid="text-cart-empty">
-                Your cart is empty
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Add products to get started
+        {/* Free shipping bar */}
+        {items.length > 0 && remainingForFreeShipping > 0 && (
+          <div className="py-3 border-b border-border/30">
+            <div className="flex items-center gap-2 mb-2">
+              <Truck className="h-3.5 w-3.5 text-muted-foreground" />
+              <p className="text-[12px] text-muted-foreground">
+                Add <span className="font-semibold text-foreground">${remainingForFreeShipping.toFixed(2)}</span> for free shipping
               </p>
             </div>
+            <div className="h-1 rounded-full bg-border/50 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-foreground transition-all duration-500 ease-premium"
+                style={{ width: `${Math.min(100, (subtotal / freeShippingThreshold) * 100)}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {items.length > 0 && remainingForFreeShipping <= 0 && (
+          <div className="py-3 border-b border-border/30 flex items-center gap-2">
+            <Truck className="h-3.5 w-3.5 text-foreground" />
+            <p className="text-[12px] font-medium text-foreground">Free shipping unlocked</p>
+          </div>
+        )}
+
+        <div className="flex-1 overflow-y-auto py-4">
+          {items.length === 0 ? (
+            <div className="flex h-full flex-col items-center justify-center text-center px-6 animate-fade-in">
+              <div className="w-16 h-16 rounded-full bg-foreground/[0.04] flex items-center justify-center mb-5">
+                <ShoppingBag className="h-7 w-7 text-muted-foreground" />
+              </div>
+              <p className="text-base font-medium text-foreground mb-1" data-testid="text-cart-empty">
+                Your cart is empty
+              </p>
+              <p className="text-sm text-muted-foreground mb-6">
+                Discover our curated collection of iconic jerseys.
+              </p>
+              <Button
+                onClick={onClose}
+                className="rounded-xl h-11 px-6"
+              >
+                Continue browsing
+              </Button>
+            </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-0 divide-y divide-border/30">
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex gap-4 rounded-lg border p-4"
+                  className="flex gap-4 py-4 animate-fade-in"
                   data-testid={`cart-item-${item.id}`}
                 >
-                  <img
-                    src={item.product.imageUrl}
-                    alt={item.product.name}
-                    className="h-20 w-20 rounded-none object-contain bg-card border border-border/60 p-2"
-                    data-testid={`img-cart-item-${item.id}`}
-                  />
-                  <div className="flex flex-1 flex-col">
-                    <h4 className="mb-1 line-clamp-1 font-semibold" data-testid={`text-cart-item-name-${item.id}`}>
-                      {item.product.name}
-                    </h4>
-                    <p className="mb-2 text-sm text-muted-foreground" data-testid={`text-cart-item-details-${item.id}`}>
-                      {item.product.club} • Tamanho: {item.size}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between">
-                      <p className="font-bold tabular-nums" data-testid={`text-cart-item-price-${item.id}`}>
-                        CAD ${(parseFloat(item.product.price) * item.quantity).toFixed(2)}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="h-7 w-7"
-                          onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
-                          data-testid={`button-cart-decrease-${item.id}`}
-                        >
-                          -
-                        </Button>
-                        <span className="w-8 text-center" data-testid={`text-cart-quantity-${item.id}`}>
+                  <div className="w-20 h-24 rounded-lg bg-card border border-border/30 flex items-center justify-center p-2 shrink-0">
+                    <img
+                      src={item.product.imageUrl}
+                      alt={item.product.name}
+                      className="max-h-full w-full object-contain"
+                      data-testid={`img-cart-item-${item.id}`}
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <h4 className="text-[14px] font-medium text-foreground line-clamp-1 tracking-[-0.01em]" data-testid={`text-cart-item-name-${item.id}`}>
+                          {item.product.name}
+                        </h4>
+                        <p className="text-[12px] text-muted-foreground mt-0.5" data-testid={`text-cart-item-details-${item.id}`}>
+                          Size: {item.size}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => onRemoveItem(item.id)}
+                        className="p-1 rounded-full hover:bg-foreground/5 transition-colors shrink-0"
+                        data-testid={`button-cart-remove-${item.id}`}
+                        aria-label={`Remove ${item.product.name}`}
+                      >
+                        <X className="h-3.5 w-3.5 text-muted-foreground" />
+                      </button>
+                    </div>
+                    <div className="mt-auto pt-2 flex items-center justify-between">
+                      <div className="flex items-center gap-0 border border-border/40 rounded-lg overflow-hidden">
+                      <button
+                        onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                        disabled={item.quantity <= 1}
+                        className="h-8 w-8 flex items-center justify-center hover:bg-foreground/5 disabled:opacity-30 transition-colors"
+                        data-testid={`button-cart-decrease-${item.id}`}
+                        aria-label="Decrease quantity"
+                      >
+                          <Minus className="h-3 w-3" />
+                        </button>
+                        <span className="h-8 w-8 flex items-center justify-center text-[13px] font-medium border-x border-border/40" data-testid={`text-cart-quantity-${item.id}`}>
                           {item.quantity}
                         </span>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="h-7 w-7"
+                        <button
                           onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                          className="h-8 w-8 flex items-center justify-center hover:bg-foreground/5 transition-colors"
                           data-testid={`button-cart-increase-${item.id}`}
+                          aria-label="Increase quantity"
                         >
-                          +
-                        </Button>
+                          <Plus className="h-3 w-3" />
+                        </button>
                       </div>
+                      <p className="text-[14px] font-semibold tabular-nums text-foreground" data-testid={`text-cart-item-price-${item.id}`}>
+                        ${(parseFloat(item.product.price) * item.quantity).toFixed(2)}
+                      </p>
                     </div>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => onRemoveItem(item.id)}
-                    data-testid={`button-cart-remove-${item.id}`}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
                 </div>
               ))}
             </div>
@@ -112,28 +149,33 @@ export function CartPreview({ open, onClose, items, onRemoveItem, onUpdateQuanti
         </div>
 
         {items.length > 0 && (
-          <SheetFooter className="mt-8 border-t pt-4">
+          <SheetFooter className="border-t border-border/30 pt-4 pb-2 mt-auto">
             <div className="w-full space-y-4">
-              <div className="flex items-center justify-between text-lg">
-                <span className="font-semibold">Subtotal:</span>
-                <span className="font-bold tabular-nums" data-testid="text-cart-subtotal">
-                  CAD ${subtotal.toFixed(2)}
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Subtotal</span>
+                <span className="text-lg font-semibold tabular-nums text-foreground" data-testid="text-cart-subtotal">
+                  ${subtotal.toFixed(2)}
                 </span>
               </div>
-              <Button size="lg" className="w-full" asChild data-testid="button-checkout">
+              <p className="text-[12px] text-muted-foreground">
+                Shipping and taxes calculated at checkout.
+              </p>
+              <Button
+                className="w-full h-13 rounded-xl text-[15px] font-semibold tracking-[-0.01em]"
+                asChild
+                data-testid="button-checkout"
+              >
                 <Link href="/checkout">
-                  <a onClick={onClose}>Finalizar Compra</a>
+                  <a onClick={onClose}>Checkout</a>
                 </Link>
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full"
+              <button
                 onClick={onClose}
+                className="w-full text-center text-sm text-muted-foreground hover:text-foreground transition-colors py-1"
                 data-testid="button-continue-shopping"
               >
-                Continuar Comprando
-              </Button>
+                Continue shopping
+              </button>
             </div>
           </SheetFooter>
         )}
