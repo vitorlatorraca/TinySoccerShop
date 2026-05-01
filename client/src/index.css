@@ -3,20 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --button-outline: rgba(0,0,0, .08);
-  --badge-outline: rgba(0,0,0, .04);
+  /* ─── TinySoccerShop brand palette ───
+     Pure tokens (use directly for non-HSL needs).
+     Black / Green / Red / Cream / White / Gray. */
+  --color-black: #1A1A1A;
+  --color-green-dark: #2D6A2D;
+  --color-green-light: #4CAF50;
+  --color-red: #C0392B;
+  --color-cream: #F7F5F0;
+  --color-white: #FFFFFF;
+  --color-gray: #4A4A4A;
+
+  --button-outline: rgba(26,26,26, .08);
+  --badge-outline: rgba(26,26,26, .04);
   --opaque-button-border-intensity: -6;
-  --elevate-1: rgba(0,0,0, .025);
-  --elevate-2: rgba(0,0,0, .06);
+  --elevate-1: rgba(26,26,26, .025);
+  --elevate-2: rgba(26,26,26, .06);
 
-  --background: 0 0% 96%;
-  --foreground: 0 0% 6%;
+  /* HSL bridge — feeds Tailwind tokens (background/foreground/etc.) */
+  --background: 40 26% 95%;       /* cream */
+  --foreground: 0 0% 10%;          /* near-black for body text */
 
-  --border: 0 0% 90%;
+  --border: 0 0% 88%;
 
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 6%;
-  --card-border: 0 0% 92%;
+  --card-foreground: 0 0% 10%;
+  --card-border: 40 18% 90%;
 
   --sidebar: 0 0% 95%;
   --sidebar-foreground: 0 0% 6%;
@@ -31,23 +43,23 @@
   --popover-foreground: 0 0% 6%;
   --popover-border: 0 0% 92%;
 
-  --primary: 0 0% 6%;
-  --primary-foreground: 0 0% 96%;
+  --primary: 120 41% 30%;          /* green-dark — primary CTA */
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 94%;
-  --secondary-foreground: 0 0% 6%;
+  --secondary: 0 0% 10%;           /* black — secondary surface */
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 0 0% 94%;
-  --muted-foreground: 0 0% 45%;
+  --muted: 40 18% 92%;
+  --muted-foreground: 0 0% 29%;    /* gray */
 
-  --accent: 345 60% 30%;
+  --accent: 122 39% 49%;           /* green-light */
   --accent-foreground: 0 0% 100%;
 
   --gold: 43 77% 52%;
   --gold-foreground: 0 0% 8%;
 
-  --destructive: 0 72% 45%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive: 7 64% 46%;        /* red — sale / urgência */
+  --destructive-foreground: 0 0% 100%;
 
   --input: 0 0% 85%;
   --ring: 0 0% 6%;
@@ -58,8 +70,8 @@
   --chart-4: 280 87% 45%;
   --chart-5: 17 88% 40%;
 
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans", "Outfit", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Bebas Neue", "Anton", "Oswald", "Inter", sans-serif;
   --font-serif: "Fraunces", ui-serif, Georgia, serif;
   --font-mono: "SF Mono", Menlo, monospace;
 
@@ -1194,6 +1206,411 @@
     .floodlit-exhibits-item[data-layout="corinthians"] {
       grid-column: 2 / span 6;
       grid-row: 3 / span 1;
+    }
+  }
+
+  /* ─── TinySoccerShop redesign utilities ─── */
+
+  .tss-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .tss-eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .tss-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.875rem;
+    padding: 0 1.5rem;
+    background: var(--color-green-dark);
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    transition: background-color 200ms ease, transform 150ms ease;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .tss-btn-primary:hover {
+    background: var(--color-green-light);
+  }
+
+  .tss-btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .tss-btn-ghost-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.875rem;
+    padding: 0 1.5rem;
+    background: transparent;
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.35);
+    transition: all 200ms ease;
+  }
+
+  .tss-btn-ghost-light:hover {
+    border-color: var(--color-white);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .tss-badge-new {
+    display: inline-flex;
+    align-items: center;
+    height: 1.5rem;
+    padding: 0 0.625rem;
+    background: var(--color-green-dark);
+    color: var(--color-white);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+  }
+
+  .tss-badge-vault {
+    display: inline-flex;
+    align-items: center;
+    height: 1.5rem;
+    padding: 0 0.625rem;
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+  }
+
+  .tss-badge-sale {
+    display: inline-flex;
+    align-items: center;
+    height: 1.5rem;
+    padding: 0 0.625rem;
+    background: var(--color-red);
+    color: var(--color-white);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+  }
+
+  .tss-price {
+    color: var(--color-red);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .tss-card {
+    background: var(--color-white);
+    border: 1px solid rgba(26,26,26,0.06);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                border-color 250ms ease;
+    will-change: transform;
+  }
+
+  .tss-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 14px 32px -10px rgba(26,26,26,0.18);
+    border-color: rgba(26,26,26,0.12);
+  }
+
+  .tss-card img {
+    transition: transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .tss-card:hover img {
+    transform: scale(1.04);
+  }
+
+  /* ─── Ticker stripe ─── */
+
+  .tss-ticker {
+    background: var(--color-green-dark);
+    color: var(--color-white);
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .tss-ticker__track {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 1rem 0;
+    width: max-content;
+    animation: tssTickerScroll 40s linear infinite;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .tss-ticker__sep {
+    color: rgba(255,255,255,0.5);
+  }
+
+  @keyframes tssTickerScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── Announcement bar ─── */
+
+  .tss-announce {
+    background: var(--color-green-dark);
+    color: var(--color-white);
+  }
+
+  /* ─── Cinematic dark category card ─── */
+
+  .tss-cat-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.875rem;
+    aspect-ratio: 4 / 5;
+    background: var(--color-black);
+    isolation: isolate;
+    transition: transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .tss-cat-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .tss-cat-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+    transition: opacity 400ms ease, transform 600ms ease;
+    z-index: 0;
+  }
+
+  .tss-cat-card:hover .tss-cat-card__img {
+    opacity: 0.75;
+    transform: scale(1.04);
+  }
+
+  .tss-cat-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(26,26,26,0.1) 0%,
+      rgba(26,26,26,0.45) 55%,
+      rgba(26,26,26,0.85) 100%);
+    z-index: 1;
+  }
+
+  .tss-cat-card__label {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 2;
+    color: var(--color-white);
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .tss-cat-card__count {
+    display: block;
+    margin-top: 0.35rem;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+
+  /* ─── Section: cream product surface ─── */
+
+  .tss-cream {
+    background: var(--color-cream);
+  }
+
+  .tss-onblack {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  /* ─── Hero: dark, cinematic ─── */
+
+  .tss-hero {
+    background: var(--color-black);
+    color: var(--color-white);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .tss-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(45,106,45,0.18) 0%, transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(192,57,43,0.10) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .tss-fade-in-up {
+    animation: fadeInUp 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  /* ─── Standardized product card (used everywhere: home, shop, search) ─── */
+
+  .product-card {
+    background: #FFFFFF;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 0.5px solid #E0DDD5;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 200ms ease, box-shadow 250ms ease, transform 250ms ease;
+  }
+
+  .product-card:hover {
+    border-color: rgba(26, 26, 26, 0.18);
+    box-shadow: 0 8px 24px -8px rgba(26, 26, 26, 0.12);
+  }
+
+  .product-card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #F7F5F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.3s ease;
+    display: block;
+  }
+
+  .product-card:hover .product-card-image-wrapper img {
+    transform: scale(1.05);
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #1A1A1A;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    line-height: 1.2;
+    z-index: 1;
+  }
+
+  .product-badge.sale {
+    background: #C0392B;
+  }
+
+  .product-badge.new {
+    background: #2D6A2D;
+  }
+
+  .product-card-info {
+    padding: 12px 14px 16px;
+    background: #FFFFFF;
+  }
+
+  .product-card-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1A1A1A;
+    margin: 0 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+
+  .product-card-sub {
+    font-size: 11px;
+    color: #4A4A4A;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .product-card-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .product-card-price.sale {
+    color: #C0392B;
+  }
+
+  /* Listing grid: 1 col mobile / 2 col tablet / 3 col desktop, gap 16px */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 }

@@ -11,7 +11,9 @@ import { formatPrice } from "@/lib/productUtils";
 import { PageShell } from "@/components/layout/PageShell";
 import { Container } from "@/components/layout/Container";
 import { HeroCarousel } from "@/components/shop/HeroCarousel";
+import { Ticker } from "@/components/shop/Ticker";
 import { FeaturedGrid } from "@/components/shop/FeaturedGrid";
+import { CategoriesGrid } from "@/components/shop/CategoriesGrid";
 import { ClubCarousel } from "@/components/shop/ClubCarousel";
 import { IconicNights } from "@/components/shop/IconicNights";
 import { ScrollReveal } from "@/components/shop/ScrollReveal";
@@ -159,19 +161,27 @@ export default function Home() {
       {/* 1 — Hero Carousel */}
       <HeroCarousel products={products} />
 
-      {/* 2 — Featured Shirts Grid */}
+      {/* 2 — Ticker Stripe */}
+      <Ticker />
+
+      {/* 3 — Featured Jerseys */}
       <div id="featured">
         <ScrollReveal>
           <FeaturedGrid products={products} />
         </ScrollReveal>
       </div>
 
-      {/* 3 — Club Carousel */}
+      {/* 4 — Categories */}
+      <ScrollReveal>
+        <CategoriesGrid products={products} />
+      </ScrollReveal>
+
+      {/* 5 — Club Carousel */}
       <ScrollReveal>
         <ClubCarousel products={products} />
       </ScrollReveal>
 
-      {/* 4 — Iconic Nights */}
+      {/* 6 — Iconic Nights */}
       <ScrollReveal>
         <IconicNights products={products} />
       </ScrollReveal>

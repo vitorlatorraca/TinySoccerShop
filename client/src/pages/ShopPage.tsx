@@ -150,7 +150,7 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen tss-cream">
       <ShopHeader
         cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
         onCartClick={() => setCartOpen(true)}
@@ -158,16 +158,38 @@ export default function ShopPage() {
         onSearchChange={setSearch}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-[1400px]">
+      {/* Page hero — black banner */}
+      <section className="tss-onblack relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-60"
+          style={{
+            background:
+              "radial-gradient(900px 320px at 80% 0%, rgba(45,106,45,0.25) 0%, transparent 60%), radial-gradient(700px 320px at 0% 100%, rgba(192,57,43,0.12) 0%, transparent 60%)",
+          }}
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px] py-14 sm:py-20 lg:py-24 relative">
+          <p className="tss-eyebrow text-[color:var(--color-green-light)] mb-4">
+            The Archive
+          </p>
+          <h1 className="tss-display text-white text-[clamp(2.5rem,7vw,5.5rem)]">
+            Shop All Jerseys
+          </h1>
+          <p className="mt-5 max-w-xl text-white/70 text-[15px] leading-relaxed">
+            Curated football, rugby and basketball pieces. Authentic, archive-grade,
+            shipped worldwide.
+          </p>
+        </div>
+      </section>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 max-w-[1400px]">
         {/* Mobile filter trigger */}
         <div className="lg:hidden mb-6 flex items-center justify-between">
           <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
             <SheetTrigger asChild>
-              <button className="flex items-center gap-2 text-sm font-medium text-foreground h-10 px-4 rounded-full border border-border/50 hover:border-foreground/20 transition-colors">
+              <button className="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-[color:var(--color-black)] h-10 px-4 rounded-full border border-[color:var(--color-black)]/15 hover:border-[color:var(--color-green-dark)] transition-colors">
                 <SlidersHorizontal className="h-4 w-4" />
                 Filters
                 {hasActiveFilters && (
-                  <span className="flex items-center justify-center h-5 min-w-5 rounded-full bg-foreground text-background text-[10px] font-semibold px-1">
+                  <span className="flex items-center justify-center h-5 min-w-5 rounded-full bg-[color:var(--color-green-dark)] text-white text-[10px] font-semibold px-1">
                     {activeChips.length}
                   </span>
                 )}
@@ -175,7 +197,9 @@ export default function ShopPage() {
             </SheetTrigger>
             <SheetContent side="left" className="w-80 overflow-y-auto">
               <SheetHeader>
-                <SheetTitle className="text-left text-base font-semibold">Filters</SheetTitle>
+                <SheetTitle className="text-left text-base font-semibold">
+                  Filters
+                </SheetTitle>
               </SheetHeader>
               <div className="mt-6">
                 <ShopFilters
@@ -187,15 +211,18 @@ export default function ShopPage() {
               </div>
             </SheetContent>
           </Sheet>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-[color:var(--color-gray)]">
             {filteredProducts.length} item{filteredProducts.length !== 1 ? "s" : ""}
           </p>
         </div>
 
-        <div className="flex gap-10 lg:gap-12">
+        <div className="flex gap-8 lg:gap-12">
           {/* Desktop filters sidebar */}
-          <div className="hidden lg:block w-56 shrink-0">
-            <div className="sticky top-24">
+          <aside className="hidden lg:block w-60 shrink-0">
+            <div className="sticky top-24 bg-white border border-[color:var(--color-black)]/8 rounded-xl p-6 shadow-sm">
+              <p className="tss-eyebrow text-[color:var(--color-green-dark)] mb-4">
+                Browse
+              </p>
               <ShopFilters
                 products={products}
                 filter={filter}
@@ -203,24 +230,24 @@ export default function ShopPage() {
                 resultCount={filteredProducts.length}
               />
             </div>
-          </div>
+          </aside>
 
           {/* Product grid */}
           <main className="flex-1 min-w-0">
             {!isLoading && (
               <div className="mb-6 animate-fade-in">
                 <div className="flex flex-wrap items-baseline gap-3">
-                  <h2 className="brand-section-title text-foreground">
+                  <h2 className="font-display text-[clamp(1.5rem,2.4vw,2rem)] uppercase tracking-[0.04em] text-[color:var(--color-black)]">
                     {search.trim() ? `"${search.trim()}"` : "All Jerseys"}
                   </h2>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm text-[color:var(--color-gray)]">
                     ({filteredProducts.length})
                   </span>
                   {hasActiveFilters && (
                     <button
                       type="button"
                       onClick={clearAllFilters}
-                      className="ml-auto text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+                      className="ml-auto text-[12px] uppercase tracking-[0.18em] font-semibold text-[color:var(--color-green-dark)] hover:text-[color:var(--color-green-light)] transition-colors"
                     >
                       Clear all
                     </button>
@@ -231,13 +258,13 @@ export default function ShopPage() {
                     {activeChips.map(({ key, label }) => (
                       <span
                         key={key}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-foreground/[0.05] px-3 py-1.5 text-[12px] font-medium text-foreground"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--color-green-dark)]/10 text-[color:var(--color-green-dark)] px-3 py-1.5 text-[12px] font-medium"
                       >
                         {label}
                         <button
                           type="button"
                           onClick={() => removeChip(key)}
-                          className="hover:bg-foreground/10 rounded-full p-0.5 transition-colors"
+                          className="hover:bg-[color:var(--color-green-dark)]/20 rounded-full p-0.5 transition-colors"
                           aria-label={`Remove ${label}`}
                         >
                           <X className="h-3 w-3" />
@@ -250,10 +277,10 @@ export default function ShopPage() {
             )}
 
             {isLoading ? (
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+              <div className="product-grid">
                 {Array.from({ length: 9 }).map((_, i) => (
                   <div key={i}>
-                    <div className="aspect-[3/4] skeleton-premium rounded-xl" />
+                    <div className="aspect-[3/4] skeleton-premium rounded" />
                     <div className="pt-3 space-y-2">
                       <div className="h-4 skeleton-premium w-3/4 rounded" />
                       <div className="h-3 skeleton-premium w-1/2 rounded" />
@@ -277,10 +304,7 @@ export default function ShopPage() {
                 </button>
               </div>
             ) : (
-              <div
-                className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
-                data-testid="shop-product-grid"
-              >
+              <div className="product-grid" data-testid="shop-product-grid">
                 {filteredProducts.map((product) => (
                   <ShopProductCard key={product.id} product={product} />
                 ))}
